@@ -1,4 +1,4 @@
-# DB-Design-Project
+# DB-Design-Project - Online Auction Database
 CS6360
 
 # Contributors

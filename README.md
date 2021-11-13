@@ -5,3 +5,4 @@ CS6360
 1. Rahul Gauri
 2. Dharav Bhatt
 3. Rainam Shah
+4. Rutvik Avaiya

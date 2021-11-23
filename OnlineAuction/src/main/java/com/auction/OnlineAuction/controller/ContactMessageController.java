@@ -6,20 +6,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.auction.OnlineAuction.dao.FeedbackDao;
+import com.auction.OnlineAuction.dao.ContactMessageDao;
 
 @RestController
-@RequestMapping("/feedback")
-public class FeedbackController {
+@RequestMapping("/contactmessage")
+public class ContactMessageController {
 
 	@Autowired
-	FeedbackDao feedbackDao;
+	ContactMessageDao contactMessageDao;
 	
 	@GetMapping(value = "/all")
-	public ModelAndView getAllFeedbacks() {
+	public ModelAndView getAllContactMessages() {
 		
-		ModelAndView model = new ModelAndView("viewFeedback");
-		model.addObject("feedbacks", feedbackDao.getFeedbackDetails());
+		ModelAndView model = new ModelAndView("viewContactMessage");
+		model.addObject("contactMessages", contactMessageDao.getContactMessageDetails());
 		return model;
 		
 	}

@@ -5,20 +5,24 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Buyer Details</title>
+<title>Bid Details</title>
 </head>
 <body>
 	<table border='1'>
 		<tr>
-			<th>Buyer Id</th>
-			<th>User Id</th>
-			<th>Shipping Address</th>
+			<th>Bids ID</th>
+			<th>Buyer ID</th>
+			<th>Product ID</th>
+			<th>Bid Time</th>
+			<th>Bid price</th>
 		</tr>
-		<c:forEach items="${buyers}" var="buyer">
+		<c:forEach items="${bids}" var="bid">
 			<tr>
-				<td>${buyer.buyerId}</td>
-				<td>${buyer.user.userId}</td>
-				<td>${buyer.shippingAddress}</td>
+				<td>${bid.bidsId}</td>
+				<td>${bid.buyer.buyerId}</td>
+				<td>${bid.product.productId}</td>
+				<td>${bid.bidTime}</td>
+				<td>${bid.bidPrice}</td>
 			</tr>
 		</c:forEach>
 	</table>

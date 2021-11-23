@@ -26,17 +26,19 @@ FOREIGN KEY (managed_by) REFERENCES ADMIN (admin_id)
 
 CREATE TABLE SELLER (
 seller_id	INT (5)		NOT NULL,
+user_id		INT (5)		NOT NULL,
 routing_Number	VARCHAR (9)	NOT NULL,
 account_Number	VARCHAR (12)	NOT NULL,
 PRIMARY KEY (seller_id),
-FOREIGN KEY (seller_id) REFERENCES USER (user_id)
+FOREIGN KEY (user_id) REFERENCES USER (user_id)
 );
 
 CREATE TABLE BUYER (
 buyer_id 		INT (5)	NOT NULL,
+user_id		INT (5)		NOT NULL,
 shipping_Address	VARCHAR (30),
 PRIMARY KEY (buyer_id),
-FOREIGN KEY (buyer_id) REFERENCES USER (user_id)
+FOREIGN KEY (user_id) REFERENCES USER (user_id)
 );
 
 CREATE TABLE CATEGORY (
@@ -150,51 +152,51 @@ INSERT INTO USER (user_id,email,role,address,fname,lname,PASSWORD,phone_number,m
 
 SELECT * FROM USER
 
-INSERT INTO SELLER (seller_id, routing_Number, account_Number) VALUES (201,'145623879','654258963185');
-INSERT INTO SELLER (seller_id, routing_Number, account_Number) VALUES (202,'987612879','753258963100');
-INSERT INTO SELLER (seller_id, routing_Number, account_Number) VALUES (203,'687423887','221258963420');
+INSERT INTO SELLER (seller_id, user_id, routing_Number, account_Number) VALUES (1,201,'145623879','654258963185');
+INSERT INTO SELLER (seller_id, user_id, routing_Number, account_Number) VALUES (2,202,'987612879','753258963100');
+INSERT INTO SELLER (seller_id, user_id, routing_Number, account_Number) VALUES (3,203,'687423887','221258963420');
 
 SELECT * FROM SELLER;
 
-INSERT INTO BUYER (buyer_id, shipping_Address) VALUES (101,'dallas');
-INSERT INTO BUYER (buyer_id, shipping_Address) VALUES (102,'austin');
-INSERT INTO BUYER (buyer_id, shipping_Address) VALUES (103,'new york');
+INSERT INTO BUYER (buyer_id, user_id, shipping_Address) VALUES (1,101,'dallas');
+INSERT INTO BUYER (buyer_id, user_id, shipping_Address) VALUES (2,102,'austin');
+INSERT INTO BUYER (buyer_id, user_id, shipping_Address) VALUES (3,103,'new york');
 
 SELECT * FROM BUYER;
 
-INSERT INTO AUCTIONS VALUES(1,202,1,'2021-10-6','2021-10-13');
-INSERT INTO AUCTIONS VALUES(2,201,3,'2021-10-1','2021-10-8');
-INSERT INTO AUCTIONS VALUES(3,203,4,'2021-10-2','2021-10-9');
-INSERT INTO AUCTIONS VALUES(4,202,2,'2021-10-1','2021-10-8');
-INSERT INTO AUCTIONS VALUES(5,203,5,'2021-10-10','2021-10-17');
+INSERT INTO AUCTIONS VALUES(1,2,1,'2021-10-6','2021-10-13');
+INSERT INTO AUCTIONS VALUES(2,1,3,'2021-10-1','2021-10-8');
+INSERT INTO AUCTIONS VALUES(3,3,4,'2021-10-2','2021-10-9');
+INSERT INTO AUCTIONS VALUES(4,2,2,'2021-10-1','2021-10-8');
+INSERT INTO AUCTIONS VALUES(5,3,5,'2021-10-10','2021-10-17');
 
 SELECT * FROM auctions;
 
-INSERT INTO BIDS VALUES(1,101,2,'2020-10-3',35);
-INSERT INTO BIDS VALUES(2,103,4,'2020-10-6',60);
-INSERT INTO BIDS VALUES(3,102,2,'2020-10-6',60);
-INSERT INTO BIDS VALUES(4,103,1,'2020-10-10',100);
-INSERT INTO BIDS VALUES(5,102,5,'2020-10-12',50);
-INSERT INTO BIDS VALUES(6,102,3,'2020-10-5',75);
-INSERT INTO BIDS VALUES(7,101,4,'2020-10-6',120);
-INSERT INTO BIDS VALUES(8,102,1,'2020-10-10',200);
-INSERT INTO BIDS VALUES(9,101,5,'2020-10-12',150);
-INSERT INTO BIDS VALUES(10,103,3,'2020-10-5',150);
+INSERT INTO BIDS VALUES(1,1,2,'2020-10-3',35);
+INSERT INTO BIDS VALUES(2,3,4,'2020-10-6',60);
+INSERT INTO BIDS VALUES(3,2,2,'2020-10-6',60);
+INSERT INTO BIDS VALUES(4,3,1,'2020-10-10',100);
+INSERT INTO BIDS VALUES(5,2,5,'2020-10-12',50);
+INSERT INTO BIDS VALUES(6,2,3,'2020-10-5',75);
+INSERT INTO BIDS VALUES(7,1,4,'2020-10-6',120);
+INSERT INTO BIDS VALUES(8,2,1,'2020-10-10',200);
+INSERT INTO BIDS VALUES(9,1,5,'2020-10-12',150);
+INSERT INTO BIDS VALUES(10,3,3,'2020-10-5',150);
 
 SELECT * FROM bids ORDER BY `product_id` ASC;
 
 
-INSERT INTO contactmessages VALUES(1,201,102,3,'2020-10-6','Buyer -> Hey is this product still available?');
-INSERT INTO contactmessages VALUES(2,201,102,3,'2020-10-7','Seller -> yes it is and as of now your the highest bidder.');
-INSERT INTO contactmessages VALUES(3,203,101,5,'2020-10-11','Buyer -> is still available?');
-INSERT INTO contactmessages VALUES(4,203,101,5,'2020-10-12','Seller -> Yes,but please look out for the current bid price');
-INSERT INTO contactmessages VALUES(5,202,102,1,'2020-10-7','Buyer -> Hi, I was just checking; in case the previous highest bidder has backed out?');
+INSERT INTO contactmessages VALUES(1,1,2,3,'2020-10-6','Buyer -> Hey is this product still available?');
+INSERT INTO contactmessages VALUES(2,1,2,3,'2020-10-7','Seller -> yes it is and as of now your the highest bidder.');
+INSERT INTO contactmessages VALUES(3,3,1,5,'2020-10-11','Buyer -> is still available?');
+INSERT INTO contactmessages VALUES(4,3,1,5,'2020-10-12','Seller -> Yes,but please look out for the current bid price');
+INSERT INTO contactmessages VALUES(5,2,2,1,'2020-10-7','Buyer -> Hi, I was just checking; in case the previous highest bidder has backed out?');
 
 SELECT * FROM contactmessages ORDER BY message_time ASC;
 
 
-INSERT INTO feedback VALUES(1,202,102,2,'2020-10-10',9,'Item was in great condition!');
-INSERT INTO feedback VALUES(2,203,103,4,'2020-10-12',3,'Item was not upto the standard and had trouble using it');
+INSERT INTO feedback VALUES(1,2,2,2,'2020-10-10',9,'Item was in great condition!');
+INSERT INTO feedback VALUES(2,3,3,4,'2020-10-12',3,'Item was not upto the standard and had trouble using it');
 
 SELECT * FROM feedback;
 
@@ -206,6 +208,3 @@ GROUP BY p.product_id
 HAVING MAX(b.bid_price);
 
 SELECT * FROM MAX_BIDDER;
-
-
-

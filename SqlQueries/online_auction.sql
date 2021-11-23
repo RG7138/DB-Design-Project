@@ -69,13 +69,14 @@ FOREIGN KEY (sub_category_id) REFERENCES SUBCATEGORY(sub_category_id)
 );
 
 CREATE TABLE FEEDBACK(
+feedback_id INT(5) NOT NULL,
 seller_id 	INT(5) NOT NULL,
 buyer_id 	INT(5) NOT NULL,
 product_id 	INT(5) NOT NULL,
 feedback_time 	DATETIME ,
 rating 		INT,
 comments 	VARCHAR(250),
-PRIMARY KEY (seller_id, buyer_id, product_id),
+PRIMARY KEY (feedback_id),
 FOREIGN KEY (seller_id) REFERENCES SELLER(seller_id),
 FOREIGN KEY (buyer_id) REFERENCES BUYER(buyer_id),
 FOREIGN KEY (product_id) REFERENCES PRODUCT(product_id)
@@ -87,28 +88,30 @@ seller_id 	INT(5) NOT NULL,
 product_id 	INT(5) NOT NULL,
 auction_date 	DATETIME NOT NULL,
 expiration_date DATETIME,
-PRIMARY KEY (seller_id,product_id, auction_date),
+PRIMARY KEY (auction_id),
 FOREIGN KEY (seller_id) REFERENCES SELLER(seller_id),
 FOREIGN KEY (product_id) REFERENCES PRODUCT(product_id)
 );
 
 CREATE TABLE BIDS(
+bids_id     INT(5) NOT NULL,
 buyer_id	INT(5) NOT NULL,
 product_id 	INT(5) NOT NULL,
 bid_time 	DATETIME,
 bid_price 	INT,
-PRIMARY KEY (buyer_id, product_id),
+PRIMARY KEY (bids_id),
 FOREIGN KEY (buyer_id) REFERENCES BUYER(buyer_id),
 FOREIGN KEY (product_id) REFERENCES PRODUCT(product_id)
 );
 
 CREATE TABLE CONTACTMESSAGES(	
+contactmessages_id	INT(5) NOT NULL,
 seller_id INT(5) NOT NULL,
 buyer_id INT(5) NOT NULL,
 product_id INT(5) NOT NULL,
 message_time DATETIME NOT NULL,
 messages VARCHAR(250),
-PRIMARY KEY (seller_id, buyer_id, product_id, message_time),
+PRIMARY KEY (contactmessages_id),
 FOREIGN KEY (seller_id) REFERENCES SELLER(seller_id),
 FOREIGN KEY (buyer_id) REFERENCES BUYER(buyer_id),
 FOREIGN KEY (product_id) REFERENCES PRODUCT(product_id)
@@ -167,31 +170,31 @@ INSERT INTO AUCTIONS VALUES(5,203,5,'2021-10-10','2021-10-17');
 
 SELECT * FROM auctions;
 
-INSERT INTO BIDS VALUES(101,2,'2020-10-3',35);
-INSERT INTO BIDS VALUES(103,4,'2020-10-6',60);
-INSERT INTO BIDS VALUES(102,2,'2020-10-6',60);
-INSERT INTO BIDS VALUES(103,1,'2020-10-10',100);
-INSERT INTO BIDS VALUES(102,5,'2020-10-12',50);
-INSERT INTO BIDS VALUES(102,3,'2020-10-5',75);
-INSERT INTO BIDS VALUES(101,4,'2020-10-6',120);
-INSERT INTO BIDS VALUES(102,1,'2020-10-10',200);
-INSERT INTO BIDS VALUES(101,5,'2020-10-12',150);
-INSERT INTO BIDS VALUES(103,3,'2020-10-5',150);
+INSERT INTO BIDS VALUES(1,101,2,'2020-10-3',35);
+INSERT INTO BIDS VALUES(2,103,4,'2020-10-6',60);
+INSERT INTO BIDS VALUES(3,102,2,'2020-10-6',60);
+INSERT INTO BIDS VALUES(4,103,1,'2020-10-10',100);
+INSERT INTO BIDS VALUES(5,102,5,'2020-10-12',50);
+INSERT INTO BIDS VALUES(6,102,3,'2020-10-5',75);
+INSERT INTO BIDS VALUES(7,101,4,'2020-10-6',120);
+INSERT INTO BIDS VALUES(8,102,1,'2020-10-10',200);
+INSERT INTO BIDS VALUES(9,101,5,'2020-10-12',150);
+INSERT INTO BIDS VALUES(10,103,3,'2020-10-5',150);
 
 SELECT * FROM bids ORDER BY `product_id` ASC;
 
 
-INSERT INTO contactmessages VALUES(201,102,3,'2020-10-6','Buyer -> Hey is this product still available?');
-INSERT INTO contactmessages VALUES(201,102,3,'2020-10-7','Seller -> yes it is and as of now your the highest bidder.');
-INSERT INTO contactmessages VALUES(203,101,5,'2020-10-11','Buyer -> is still available?');
-INSERT INTO contactmessages VALUES(203,101,5,'2020-10-12','Seller -> Yes,but please look out for the current bid price');
-INSERT INTO contactmessages VALUES(202,102,1,'2020-10-7','Buyer -> Hi, I was just checking; in case the previous highest bidder has backed out?');
+INSERT INTO contactmessages VALUES(1,201,102,3,'2020-10-6','Buyer -> Hey is this product still available?');
+INSERT INTO contactmessages VALUES(2,201,102,3,'2020-10-7','Seller -> yes it is and as of now your the highest bidder.');
+INSERT INTO contactmessages VALUES(3,203,101,5,'2020-10-11','Buyer -> is still available?');
+INSERT INTO contactmessages VALUES(4,203,101,5,'2020-10-12','Seller -> Yes,but please look out for the current bid price');
+INSERT INTO contactmessages VALUES(5,202,102,1,'2020-10-7','Buyer -> Hi, I was just checking; in case the previous highest bidder has backed out?');
 
 SELECT * FROM contactmessages ORDER BY message_time ASC;
 
 
-INSERT INTO feedback VALUES(202,102,2,'2020-10-10',9,'Item was in great condition!');
-INSERT INTO feedback VALUES(203,103,4,'2020-10-12',3,'Item was not upto the standard and had trouble using it');
+INSERT INTO feedback VALUES(1,202,102,2,'2020-10-10',9,'Item was in great condition!');
+INSERT INTO feedback VALUES(2,203,103,4,'2020-10-12',3,'Item was not upto the standard and had trouble using it');
 
 SELECT * FROM feedback;
 

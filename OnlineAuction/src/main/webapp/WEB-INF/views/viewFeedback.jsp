@@ -26,7 +26,7 @@
 				<td>${feedback.product.productId}</td>
 				<td>${feedback.feedbackTime}</td>
 				<td>${feedback.rating}</td>
-				<td>${product.comments}</td>
+				<td>${feedback.comments}</td>
 			</tr>
 		</c:forEach>
 	</table>

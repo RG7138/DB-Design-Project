@@ -11,7 +11,6 @@
 	<table border='1'>
 		<tr>
 			<th>Id</th>
-			<th>Email</th>
 			<th>Product Name</th>
 			<th>Product Info</th>
 			<th>Initial Bid Price</th>

@@ -13,13 +13,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="feedback")
-public class Feedback{
+@Table(name="contactmessages")
+public class ContactMessage{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="feedback_id")
-	private int feedbackId;
+	@Column(name="contactmessages_id")
+	private int contactMessagesId;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "seller_id", referencedColumnName = "seller_id")
@@ -33,21 +33,18 @@ public class Feedback{
 	@JoinColumn(name = "product_id", referencedColumnName = "product_id")
 	private Product product;
 	
-	@Column(name = "feedback_time")
-	private Date feedbackTime;
+	@Column(name = "message_time")
+	private Date messageTime;
 	
-	@Column(name = "rating")
-	private int rating;
+	@Column(name = "messages")
+	private String messages;
 
-	@Column(name = "comments")
-	private String comments;
-
-	public int getFeedbackId() {
-		return feedbackId;
+	public int getContactMessagesId() {
+		return contactMessagesId;
 	}
 
-	public void setFeedbackId(int feedbackId) {
-		this.feedbackId = feedbackId;
+	public void setContactMessagesId(int contactMessagesId) {
+		this.contactMessagesId = contactMessagesId;
 	}
 
 	public Seller getSeller() {
@@ -74,34 +71,26 @@ public class Feedback{
 		this.product = product;
 	}
 
-	public Date getFeedbackTime() {
-		return feedbackTime;
+	public Date getMessageTime() {
+		return messageTime;
 	}
 
-	public void setFeedbackTime(Date feedbackTime) {
-		this.feedbackTime = feedbackTime;
+	public void setMessageTime(Date messageTime) {
+		this.messageTime = messageTime;
 	}
 
-	public int getRating() {
-		return rating;
+	public String getMessages() {
+		return messages;
 	}
 
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
-
-	public String getComments() {
-		return comments;
-	}
-
-	public void setComments(String comments) {
-		this.comments = comments;
+	public void setMessages(String messages) {
+		this.messages = messages;
 	}
 
 	@Override
 	public String toString() {
-		return "Feedback [feedbackId=" + feedbackId + ", seller=" + seller + ", buyer=" + buyer + ", product=" + product
-				+ ", feedbackTime=" + feedbackTime + ", rating=" + rating + ", comments=" + comments + "]";
+		return "ContactMessage [contactmessagesId=" + contactMessagesId + ", seller=" + seller + ", buyer=" + buyer
+				+ ", product=" + product + ", messageTime=" + messageTime + ", messages=" + messages + "]";
 	}
-	
+
 }

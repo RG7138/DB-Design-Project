@@ -140,7 +140,7 @@ INSERT INTO PRODUCT (product_id,product_name,product_info,initial_bid_price,max_
 INSERT INTO PRODUCT (product_id,product_name,product_info,initial_bid_price,max_bid_price,managed_by,sub_category_id) VALUES (3,'I-Phone 11','Color - red',600,850,001,2);
 INSERT INTO PRODUCT (product_id,product_name,product_info,initial_bid_price,max_bid_price,managed_by,sub_category_id) VALUES (4,'Lamy safari pen','gold nib, rotator refil, additional ink bottle',100,280,001,4);
 INSERT INTO PRODUCT (product_id,product_name,product_info,initial_bid_price,max_bid_price,managed_by,sub_category_id) VALUES (5,'One Plus 9','Android with the latest oxygen OS, fast charger',1500,3000,001,2);
-UPDATE PRODUCT SET product_info = 'Brand - Yonex' WHERE product_id = 'P001';
+UPDATE PRODUCT SET product_info = 'Brand - Yonex' WHERE product_id = 1;
 SELECT * FROM PRODUCT;
 
 INSERT INTO USER (user_id,email,role,address,fname,lname,PASSWORD,phone_number,managed_by) VALUES (101,'rohan@gmail.com','buyer','dallas','rohan','taylor','rohan@101','4561237890',1);
@@ -150,7 +150,7 @@ INSERT INTO USER (user_id,email,role,address,fname,lname,PASSWORD,phone_number,m
 INSERT INTO USER (user_id,email,role,address,fname,lname,PASSWORD,phone_number,managed_by) VALUES (202,'rose@gmail.com','seller','dallas','rose','collymore','rose@202','4781245210',1);
 INSERT INTO USER (user_id,email,role,address,fname,lname,PASSWORD,phone_number,managed_by) VALUES (203,'finch@gmail.com','seller','boston','finch','steller','finch@203','9761237894',1);
 
-SELECT * FROM USER
+SELECT * FROM USER;
 
 INSERT INTO SELLER (seller_id, user_id, routing_Number, account_Number) VALUES (1,201,'145623879','654258963185');
 INSERT INTO SELLER (seller_id, user_id, routing_Number, account_Number) VALUES (2,202,'987612879','753258963100');

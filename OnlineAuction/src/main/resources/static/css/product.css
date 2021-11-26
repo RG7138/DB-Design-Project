@@ -1,0 +1,19 @@
+.product-right-wrap{
+    padding: 45px 0px;
+}
+.bid-wrap label{
+    font-family: 'Karla';
+}
+.bid-wrap input{
+   width: 20%;
+   border: 1px solid #C0C0C0;
+}
+.swiper-button-next::after , .swiper-button-prev::after{
+    color: #d29c7d;
+    font-size: 21px;
+} 
+@media screen and (min-width:992px) {
+    .product-right-wrap{
+        width: 400px;
+    }
+}

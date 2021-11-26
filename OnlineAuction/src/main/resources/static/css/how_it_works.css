@@ -1,0 +1,17 @@
+.how_it_works i , .about_us i,.services i{
+    font-size: 40px;
+    color: white; 
+}
+.filled_icon{
+    background-color:#d29c7d;
+    display: inline-block;
+    width: 90px;
+    height: 90px;
+    border: 1px solid #d29c7d;
+    border-radius: 50%;
+    padding-top: 22px;
+    text-align: center;
+}
+.about_us{
+    margin-top: 100px;
+}

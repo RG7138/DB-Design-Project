@@ -1,0 +1,14 @@
+.text_wrap_banner{
+    z-index:2 ;
+}
+.hero_banner .image_wrap{
+    opacity: 0.9;
+    height:600px;
+}
+.hero_banner .image_wrap img{
+    object-fit: cover;
+    height: 100%;
+}
+.hero_banner .section_text_wrap h2{
+    font-size: 34px;
+}

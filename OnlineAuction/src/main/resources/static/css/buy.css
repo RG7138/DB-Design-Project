@@ -1,0 +1,10 @@
+.list_collection_wrapper{
+    margin-top: 100px;
+}
+.collection_banner .image_wrap{
+    height: 400px;
+}
+.collection_banner .image_wrap img{
+    height: 100%;
+    object-fit: cover;
+}

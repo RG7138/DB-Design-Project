@@ -15,6 +15,7 @@ public class AdminDao {
 	AdminRepository adminRepository;
 	
 	public List<Admin> getAdminDetails() {
+		
 		return adminRepository.findAll();
 	}
 }

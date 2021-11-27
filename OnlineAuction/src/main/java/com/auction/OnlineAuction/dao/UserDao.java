@@ -17,4 +17,13 @@ public class UserDao {
 	public List<User> getUserDetails() {
 		return userRepository.findAll();
 	}
+	
+	public User addUser(User user) {
+		return userRepository.save(user);
+	}
+	
+	public User userLogin(String email, String password) {
+		User user = userRepository.getUserByEmailAndPassword(email, password);
+		return user;
+	}
 }

@@ -17,4 +17,8 @@ public class SellerDao {
 	public List<Seller> getSellerDetails() {
 		return sellerRepository.findAll();
 	}
+	
+	public Seller addSeller(Seller seller) {
+		return sellerRepository.save(seller);
+	}
 }

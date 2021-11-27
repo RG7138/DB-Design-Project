@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/fonts.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/header.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/footer.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
@@ -24,7 +24,10 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 </head>
-
+<%
+	HttpSession session1 = request.getSession(false);
+	session1.invalidate();
+%>
 <body style="min-height: 100vh;">
 
     <!-- header strat -->
@@ -45,7 +48,7 @@
                     </div>
                     <div class="logo py-2">
                         <a href="">
-                            <img src="images/headerlogo.png" alt="">
+                            <img src="<%=request.getContextPath() %>/images/headerlogo.png" alt="">
                         </a>
                     </div>
                     <div class="navigation collapse navbar-collapse" id="navbarSupportedContent">
@@ -71,7 +74,7 @@
                     <div class="icons">
                         <ul class="navbar-nav p-0 ms-auto">
                             <li class="nav-item">
-                                <a href="login.html" class="text-black text-uppercase">
+                                <a href="/auction" class="text-black text-uppercase">
                                     sign in/Register
                                 </a>
                             </li>
@@ -90,7 +93,7 @@
             <div class="navigation_icon d-flex justify-content-between align-items-center border-bottom py-3 px-3 pb-3">
                 <div class="logo">
                     <a href="">
-                        <img src="images/headerlogo.png" alt="">
+                        <img src="<%=request.getContextPath() %>/images/headerlogo.png" alt="">
                     </a>
                 </div>
                 <div class="close">
@@ -142,32 +145,32 @@
     </header>
     <!-- header end -->
 
-
+	<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     <div class="col-sm-8 col-md-6 col-lg-4 p-6 mx-auto text-center bg-white position-relative mt-5 mb-5">
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab">
                 <h2 style="font-family: 'lato';">Login</h2>
-                <form method="post" action="index.html" id="customer_login" accept-charset="UTF-8">
-                    <input type="email" id="customerEmail" name="customer[email]" aria-label="email" placeholder="Email"
+                <form:form method="post" action="/user/login" id="customer_login" accept-charset="UTF-8" modelAttribute="user">
+                    <form:input type="email" id="customerEmail" name="customer[email]" aria-label="email" placeholder="Email"
                         autocorrect="off" autocapitalize="off" required="required" class="form-control"
-                        style="margin-bottom: 15px;">
-                    <input type="password" id="customerPassword" name="customer[password]" aria-label="email"
+                        style="margin-bottom: 15px;" path="email"/>
+                    <form:input type="password" id="customerPassword" name="customer[password]" aria-label="email"
                         placeholder="Enter Password" autocorrect="off" autocapitalize="off" required="required"
-                        class="form-control" style="margin-bottom: 15px;">
-                    <a href="index.html" class="btn btn-primary btn-block" style="margin-bottom: 5px;">Login</a>
+                        class="form-control" style="margin-bottom: 15px;" path="password"/>
+                    <button class="btn btn-primary btn-block" type="submit" style="margin-bottom: 5px;">Login</button>
                     <p style="font-size: 12px; text-align: left; font-family: lato; font-style: italic;">Do not have an
                         account?</p>
                     <div class="signup button" style="border-radius: 10px;">
                         <div class="row">
                             <div class="col-md-6">
-                                <a href="Signup_Buyer.html" class="btn btn-primary btn-block">Sign-up as Buyer</a>
+                                <a href="/buyer/sign-up" class="btn btn-primary btn-block">Sign-up as Buyer</a>
                             </div>
                             <div class="col-md-6">
-                                <a href="Signup_Seller.html" class="btn btn-primary btn-block">Sign-up as Seller</a>
+                                <a href="/seller/sign-up" class="btn btn-primary btn-block">Sign-up as Seller</a>
                             </div>
                         </div>
                     </div>
-                </form>
+                </form:form>
             </div>
 
         </div>
@@ -187,8 +190,8 @@
     </div>
     <!-- footer end -->
 
-    <script src="js/index.js"></script>
-    <script src="js/header.js"></script>
+    <script src="<%=request.getContextPath() %>/js/index.js"></script>
+    <script src="<%=request.getContextPath() %>/js/header.js"></script>
 </body>
 
 </html>

@@ -19,6 +19,7 @@ public class AdminController {
 	public ModelAndView getAllAdmins() {
 		
 		ModelAndView model = new ModelAndView("viewAdmin");
+		// admins -> List of all admins
 		model.addObject("admins", adminDao.getAdminDetails());
 		return model;
 		

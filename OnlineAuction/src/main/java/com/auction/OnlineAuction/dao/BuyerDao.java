@@ -17,4 +17,8 @@ public class BuyerDao {
 	public List<Buyer> getBuyerDetails() {
 		return buyerRepository.findAll();
 	}
+	
+	public Buyer addBuyer(Buyer buyer) {
+		return buyerRepository.save(buyer);
+	}
 }

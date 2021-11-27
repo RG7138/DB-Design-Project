@@ -5,10 +5,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home</title>
-  <link rel="stylesheet" href="css/fonts.css">
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="css/header.css">
-  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/css/fonts.css">
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css">
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/css/header.css">
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/css/footer.css">
   <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
@@ -16,11 +16,21 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
-  <link rel="stylesheet" href="css/hero_banner.css">
-  <link rel="stylesheet" href="css/featured_collection.css">
-  <link rel="stylesheet" href="css/how_it_works.css">  
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/css/hero_banner.css">
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/css/featured_collection.css">
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/css/how_it_works.css">  
 </head>
-
+<%@ page import="com.auction.OnlineAuction.model.User" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%
+	HttpSession session1 = request.getSession(false);
+	User user = null;
+	if(session1.getAttribute("user")!=null){
+		
+		user = (User) session1.getAttribute("user");
+	}
+	
+%>
 <body>
   <!-- header strat -->
   <header id="header" class="box-shadow">
@@ -39,7 +49,7 @@
           </div>
           <div class="logo py-2">
             <a href="">
-              <img src="images/headerlogo.png" alt="">
+              <img src="<%=request.getContextPath() %>/images/headerlogo.png" alt="">
             </a>
           </div>
           <div class="navigation collapse navbar-collapse" id="navbarSupportedContent">
@@ -66,7 +76,7 @@
             <ul class="navbar-nav p-0 ms-auto">
               <li class="nav-item">
                 <a href="login.html" class="text-black text-uppercase">
-                  sign in/Register
+                  Welcome <%=user.getFname()%> <%=user.getLname()%>
                 </a>
               </li>
             </ul>
@@ -84,7 +94,7 @@
       <div class="navigation_icon d-flex justify-content-between align-items-center border-bottom py-3 px-3 pb-3">
         <div class="logo">
           <a href="">
-            <img src="images/headerlogo.png" alt="">
+            <img src="<%=request.getContextPath() %>/images/headerlogo.png" alt="">
           </a>
         </div>
         <div class="close">
@@ -168,8 +178,8 @@
     <div class="hero_banner">
       <div class="image_with_text_wrapper position-relative">
         <div class="image_wrap">
-          <img src="images/hero_banner_main.jpg" alt="" class="d-none d-lg-block w-100">
-          <img src="images/hero_banner_mobile.jpg" alt="" class="d-lg-none w-100">
+          <img src="<%=request.getContextPath() %>/images/hero_banner_main.jpg" alt="" class="d-none d-lg-block w-100">
+          <img src="<%=request.getContextPath() %>/images/hero_banner_mobile.jpg" alt="" class="d-lg-none w-100">
         </div>
         <div class="position-absolute text-center container text_wrap min-100 start-0 end-0 top-50 justify-content-center justify-content-lg-end translate-middle-y align-items-center d-flex">
           <div class="section_text_wrap col-xl-4 col-xxl-6 col-lg-5 col-md-7 col-12 ">
@@ -226,7 +236,7 @@
   <div class="swiper-wrapper">
     <div class=" swiper-slide position-relative">
       <div class="product-img">
-        <a href="product1.html"><img src="images/p1.jpg" alt="img not found " class="w-100" ></a>
+        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p1.jpg" alt="img not found " class="w-100" ></a>
       </div>
       <div class="product-detail mt-3">
         <a href="product1.html" class=" fw-bold text-decoration-none text-capitalize text-dark-coffee"><h5>black shoes</h5></a>
@@ -237,7 +247,7 @@
     </div>
     <div class=" swiper-slide position-relative">
       <div class="product-img">
-        <a href="product1.html"><img src="images/p2.jpg" alt="img not found " class="w-100" ></a>
+        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p2.jpg" alt="img not found " class="w-100" ></a>
       </div>
       <div class="product-detail mt-3">
         <a href="product1.html" class=" fw-bold text-decoration-none text-capitalize text-dark-coffee"><h5>women hangbag</h5></a>
@@ -248,7 +258,7 @@
     </div>
     <div class=" swiper-slide position-relative">
       <div class="product-img">
-        <a href="product1.html"><img src="images/p3.jpg" alt="img not found " class="w-100" ></a>
+        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p3.jpg" alt="img not found " class="w-100" ></a>
       </div>
       <div class="product-detail mt-3">
         <a href="product1.html" class=" fw-bold text-decoration-none text-capitalize text-dark-coffee"><h5>men jacket</h5></a>
@@ -259,7 +269,7 @@
     </div>
     <div class=" swiper-slide position-relative">
       <div class="product-img">
-        <a href="product1.html"><img src="images/p4.jpg" alt="img not found " class="w-100" ></a>
+        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p4.jpg" alt="img not found " class="w-100" ></a>
       </div>
       <div class="product-detail mt-3">
         <a href="product1.html" class=" fw-bold text-decoration-none text-capitalize text-dark-coffee"><h5>men sunglasses</h5></a>
@@ -270,7 +280,7 @@
     </div>
     <div class=" swiper-slide position-relative">
       <div class="product-img">
-        <a href="product1.html"><img src="images/p5.jpg" alt="img not found " class="w-100" ></a>
+        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p5.jpg" alt="img not found " class="w-100" ></a>
       </div>
       <div class="product-detail mt-3">
         <a href="product1.html" class=" fw-bold text-decoration-none text-capitalize text-dark-coffee"><h5>ear phones</h5></a>
@@ -281,7 +291,7 @@
     </div>
     <div class=" swiper-slide position-relative">
       <div class="product-img">
-        <a href="product1.html"><img src="images/p6.jpg" alt="img not found " class="w-100" ></a>
+        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p6.jpg" alt="img not found " class="w-100" ></a>
       </div>
       <div class="product-detail mt-3">
         <a href="product1.html" class=" fw-bold text-decoration-none text-capitalize text-dark-coffee"><h5>cellieng lamp</h5></a>
@@ -292,7 +302,7 @@
     </div>
     <div class=" swiper-slide position-relative">
       <div class="product-img">
-        <a href="product1.html"><img src="images/p7.jpg" alt="img not found " class="w-100" ></a>
+        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p7.jpg" alt="img not found " class="w-100" ></a>
       </div>
       <div class="product-detail mt-3">
         <a href="product1.html" class=" fw-bold text-decoration-none text-capitalize text-dark-coffee"><h5>zaveri pearls</h5></a>
@@ -303,7 +313,7 @@
     </div>
     <div class=" swiper-slide position-relative">
       <div class="product-img">
-        <a href="product1.html"><img src="images/p8.jpg" alt="img not found " class="w-100" ></a>
+        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p8.jpg" alt="img not found " class="w-100" ></a>
       </div>
       <div class="product-detail mt-3">
         <a href="product1.html" class=" fw-bold text-decoration-none text-capitalize text-dark-coffee"><h5>samsung smart watch</h5></a>
@@ -388,7 +398,7 @@
   <div class="container">
     <div class="row">
       <div class="  col-xl-7  px-6">
-        <img src="images/aboutus.jpg" class="w-100" alt="">
+        <img src="<%=request.getContextPath() %>/images/aboutus.jpg" class="w-100" alt="">
       </div>
       <div class="col-xl-5 ">
         <div class="my-4"> 
@@ -435,8 +445,8 @@
 <!-- footer end -->
 
 
-<script src="js/header.js"></script>
+<script src="<%=request.getContextPath() %>/js/header.js"></script>
 <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-<script src="js/index.js"></script>
+<script src="<%=request.getContextPath() %>/js/index.js"></script>
 </body>
 </html>

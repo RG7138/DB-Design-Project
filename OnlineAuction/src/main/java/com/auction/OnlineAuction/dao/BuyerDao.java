@@ -21,4 +21,8 @@ public class BuyerDao {
 	public Buyer addBuyer(Buyer buyer) {
 		return buyerRepository.save(buyer);
 	}
+	
+	public Buyer getBuyerByUserId(int userId) {
+		return buyerRepository.getBuyerByUserId(userId);
+	}
 }

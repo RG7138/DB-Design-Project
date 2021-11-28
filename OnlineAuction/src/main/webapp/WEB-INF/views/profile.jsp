@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product page</title>
-    <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/footer.css">
+    <title>Profile page</title>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/fonts.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/header.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/footer.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
@@ -25,12 +25,22 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
-    <link rel="stylesheet" href="css/hero_banner.css">
-    <link rel="stylesheet" href="css/featured_collection.css">
-    <link rel="stylesheet" href="css/how_it_works.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/hero_banner.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/featured_collection.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/how_it_works.css">
 
 </head>
-
+<%@ page import="com.auction.OnlineAuction.model.User" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%
+	HttpSession session1 = request.getSession(false);
+	User user = null;
+	if(session1.getAttribute("user")!=null){
+		
+		user = (User) session1.getAttribute("user");
+	}
+	
+%>
 <body>
     <!-- header strat -->
     <header id="header" class="box-shadow">
@@ -50,19 +60,19 @@
                     </div>
                     <div class="logo py-2">
                         <a href="">
-                            <img src="images/headerlogo.png" alt="">
+                            <img src="<%=request.getContextPath() %>/images/headerlogo.png" alt="">
                         </a>
                     </div>
                     <div class="navigation collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0 p-0 text-uppercase">
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="index.html">home</a>
+                                <a class="nav-link" aria-current="page" href="/user/home">home</a>
                             </li>
                             <li class="nav-item hotel_bedding">
-                                <a class="nav-link" href="buy.html">buy</a>
+                                <a class="nav-link" href="/buyer/buy">buy</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="sell.html" tabindex="-1" aria-disabled="true">sell</a>
+                                <a class="nav-link" href="/seller/sell" tabindex="-1" aria-disabled="true">sell</a>
                             </li>
                             <li class="nav-item position-relative services">
                                 <a class="nav-link" href="services.html" tabindex="-1" aria-disabled="true">services</a>
@@ -74,7 +84,7 @@
                         </ul>
                     </div>
 
-                    <div class="icons">
+                    <!-- <div class="icons">
                         <ul class="navbar-nav p-0 ms-auto">
                             <li class="nav-item">
                                 <a href="login.html" class="text-black text-uppercase">
@@ -82,7 +92,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
 
                 </div>
             </nav>
@@ -96,7 +106,7 @@
             <div class="navigation_icon d-flex justify-content-between align-items-center border-bottom py-3 px-3 pb-3">
                 <div class="logo">
                     <a href="">
-                        <img src="images/headerlogo.png" alt="">
+                        <img src="<%=request.getContextPath() %>/images/headerlogo.png" alt="">
                     </a>
                 </div>
                 <div class="close">
@@ -163,24 +173,24 @@
 
 
     <!-- PRODUCT MAIN SECTION -->
-
+	<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     <div class="user-profile-wrap mt-4" style="padding-top: 25px;">
         <h1 style="text-align: center;">Profile</h1>
         <div class="user-image text-center mx-auto">
-            <img src="images/User-Icon.png" alt="img not found" style="width: 10%;">
+            <img src="<%=request.getContextPath() %>/images/User-Icon.png" alt="img not found" style="width: 10%;">
         </div>
     </div>
     <div class="col-sm-8 col-md-6 col-lg-4 p-6 mx-auto text-center bg-white position-relative mt-5">
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab">
-                <form method="post" action="Login.html" id="customer_login" accept-charset="UTF-8">
+                <form:form method="post" action="/user/updateProfile" id="customer_login" accept-charset="UTF-8" modelAttribute="data">
                     <!-- First Name -->
                     <div class="row pt-4">
                         <div class="col-md-3"><label style="margin-top: 7px;">First Name</label></div>
                         <div class="col-md-9 form-group">
-                            <input type="text" id="registerCustomerFirstName" name="customer[first_name]"
+                            <form:input type="text" id="registerCustomerFirstName" name="customer[first_name]"
                         aria-label="first name" placeholder="First Name" required="required" class="form-control mr-2"
-                        style="margin-right: 6px; margin-bottom: 15px;" value="Alexia">
+                        style="margin-right: 6px; margin-bottom: 15px;" path="user.fname" disabled="true"/>
                         </div>
                     </div>
                     <!-- Last Name -->
@@ -188,18 +198,18 @@
                         <div class="col-md-3"><label style="margin-top: 7px;">Last Name</label></div>
                         <div class="col-md-9 form-group">
                             
-                    <input type="text" id="customerLastName" name="customer[last_name]" aria-label="last name"
+                    <form:input type="text" id="customerLastName" name="customer[last_name]" aria-label="last name"
                     placeholder="Last Name" required="required" class="form-control ml-2"
-                    style="margin-bottom: 15px;" value="Sommers">
+                    style="margin-bottom: 15px;" path="user.lname" disabled="true"/>
                         </div>
                     </div>
                     <!-- Email -->
                     <div class="row pt-4">
                         <div class="col-md-3"><label style="margin-top: 7px;">Email</label></div>
                         <div class="col-md-9 form-group">
-                            <input type="email" id="customerEmail" name="customer[email]" aria-label="email" placeholder="Email"
+                            <form:input type="email" id="customerEmail" name="customer[email]" aria-label="email" placeholder="Email"
                             autocorrect="off" autocapitalize="off" required="required" class="form-control"
-                            style="margin-bottom: 15px;" value="onlineauction@yahoo.com">
+                            style="margin-bottom: 15px;" path="user.email" disabled="true"/>
                         </div>
                     </div>
                     
@@ -207,30 +217,42 @@
                     <div class="row pt-4">
                         <div class="col-md-3"><label style="margin-top: 7px;">Address</label></div>
                         <div class="col-md-9 form-group">
-                            <textarea rows="3" type="text" id="customerAddress" name="customer[address]" aria-label="address"
+                            <form:textarea rows="3" type="text" id="customerAddress" name="customer[address]" aria-label="address"
                             placeholder="Address" autocorrect="off" autocapitalize="off" required="required"
-                            class="form-control" style="margin-bottom: 15px;">800 W Campbell Rd, Richardson, TX 75080, USA</textarea>
+                            class="form-control" style="margin-bottom: 15px;" path="user.address"></form:textarea>
                         </div>
                     </div>
                     
+                    <% if(user.getRole().equals("buyer")){ %>
+                    <!-- Shipping Address -->
+                    <div class="row pt-4">
+                       <div class="col-md-3"><label style="margin-top: 7px;">Shipping Address</label></div>
+                       <div class="col-md-9 form-group">
+                           <form:textarea rows="3" type="text" id="customerShippingAddress" name="customer[address]" aria-label="shipping address"
+                           placeholder="Shipping Address" autocorrect="off" autocapitalize="off" required="required"
+                           class="form-control" style="margin-bottom: 15px;" path="shippingAddress"></form:textarea>
+                       </div>
+                   </div>
+                    <%} %>
                    
                     <!-- Phone Number -->
                     <div class="row pt-4">
                         <div class="col-md-3"><label style="margin-top: 7px;">Phone</label></div>
                         <div class="col-md-9 form-group">
-                            <input type="tel" maxlength="10" id="customerNumber" name="customer[number]" aria-label="number"
+                            <form:input type="tel" maxlength="10" id="customerNumber" name="customer[number]" aria-label="number"
                             placeholder="Phone Number" autocorrect="off" autocapitalize="off" required="required"
-                            class="form-control" style="margin-bottom: 15px;" value="+1 499 917 1890">
+                            class="form-control" style="margin-bottom: 15px;" path="user.phoneNumber"/>
                         </div>
                     </div>
                     
+                    <% if(user.getRole().equals("seller")){ %>
                     <!-- Routing Number -->
 
                     <div class="row pt-4">
                         <div class="col-md-3"><label style="margin-top: 7px;">Routing No.</label></div>
                         <div class="col-md-9 form-group">
-                            <input type="text" id="routing" name="routing" aria-label="routing" placeholder="Routing Number"
-                        required="required" class="form-control ml-2" style="margin-bottom: 15px;" value="123456789">
+                            <form:input type="text" id="routing" name="routing" aria-label="routing" placeholder="Routing Number"
+                        required="required" class="form-control ml-2" style="margin-bottom: 15px;" path="routingNumber"/>
                         </div>
                     </div>
                     
@@ -240,37 +262,37 @@
                     <div class="row pt-4">
                         <div class="col-md-3"><label style="margin-top: 7px;">Account No.</label></div>
                         <div class="col-md-9 form-group">
-                            <input type="text" id="account" name="account" aria-label="account" placeholder="Account Number"
-                            required="required" class="form-control ml-2" style="margin-bottom: 15px;" value="12345678901">
+                            <form:input type="text" id="account" name="account" aria-label="account" placeholder="Account Number"
+                            required="required" class="form-control ml-2" style="margin-bottom: 15px;" path="accountNumber"/>
                         </div>
                     </div>
-                    
+                    <%} %>
                    
                     <!-- Password -->
                     <div class="row pt-4">
                         <div class="col-md-3"><label style="margin-top: 7px;">Password</label></div>
                         <div class="col-md-9 form-group">
-                            <input type="password" id="customerPassword" name="customer[password]" aria-label="password"
+                            <form:input type="password" id="customerPassword" name="customer[password]" aria-label="password"
                             placeholder="Password" autocorrect="off" autocapitalize="off" required="required"
-                            class="form-control" style="margin-bottom: 15px;" value="123456789">
+                            class="form-control" style="margin-bottom: 15px;" path="user.password"/>
                         
                         </div>
                     </div>
                     <!-- Confirm Password -->
                     <div class="row pt-4">
-                        <div class="col-md-3"><label style="margin-top: 7px;">Confirm Pass.</label></div>
+                        <div class="col-md-3"><label style="margin-top: 7px;">Confirm Password</label></div>
                         <div class="col-md-9 form-group">
                             <input type="password" id="customerConfirmPassword" name="customer[confirmpassword]"
                             aria-label="ConfirmPassword" placeholder="Confirm Password" autocorrect="off"
-                            autocapitalize="off" required="required" class="form-control" style="margin-bottom: 15px;"  value="123456789">
+                            autocapitalize="off" required="required" class="form-control" style="margin-bottom: 15px;"  >
         
                         </div>
                     </div>
 
                     
                     <a href="Login.html" class="btn btn-primary btn-block mt-3">Update</a>
+            </form:form>
             </div>
-            </form>
         </div>
     </div>
     <!-- footer start -->
@@ -291,10 +313,21 @@
 
     <!-- js -->
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-    <script src="/js/popper_min.js"></script>
-    <script src="./js/bootstrap.js"></script>
-    <script src="js/index.js"></script>
-    <script src="js/product.js"></script>
+    <script src="<%=request.getContextPath() %>/js/popper_min.js"></script>
+    <script src="<%=request.getContextPath() %>/js/bootstrap.js"></script>
+    <script src="<%=request.getContextPath() %>/js/index.js"></script>
+    <script src="<%=request.getContextPath() %>/js/product.js"></script>
+<script type="text/javascript">
+    function validatePwd() {
+        var password = document.getElementById("customerPassword").value;
+        var confirmPassword = document.getElementById("customerConfirmPassword").value;
+        if (password != confirmPassword) {
+            alert("Passwords do not match.");
+            return false;
+        }
+        return true;
+    }
+</script>
 </body>
 
 </html>

@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/fonts.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/header.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/footer.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
 
 <body>
@@ -34,20 +34,20 @@
                     </div>
                     <div class="logo py-2">
                         <a href="">
-                            <img src="images/headerlogo.png" alt="">
+                            <img src="<%=request.getContextPath() %>/images/headerlogo.png" alt="">
                         </a>
                     </div>
                     <div class="navigation collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0 p-0 text-uppercase">
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="index.html">home</a>
-                            </li>
-                            <li class="nav-item hotel_bedding">
-                                <a class="nav-link" href="buy.html">buy</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="sell.html" tabindex="-1" aria-disabled="true">sell</a>
-                            </li>
+				                <a class="nav-link" aria-current="page" href="/user/home">home</a>
+				              </li>
+				              <li class="nav-item hotel_bedding">
+				                <a class="nav-link" href="/buyer/buy">buy</a>
+				              </li>
+				              <li class="nav-item">
+				                <a class="nav-link" href="/seller/sell" tabindex="-1" aria-disabled="true">sell</a>
+				             </li>
                             <li class="nav-item position-relative services">
                                 <a class="nav-link" href="services.html" tabindex="-1" aria-disabled="true">services</a>
                             </li>
@@ -79,7 +79,7 @@
             <div class="navigation_icon d-flex justify-content-between align-items-center border-bottom py-3 px-3 pb-3">
                 <div class="logo">
                     <a href="">
-                        <img src="images/headerlogo.png" alt="">
+                        <img src="<%=request.getContextPath() %>/images/headerlogo.png" alt="">
                     </a>
                 </div>
                 <div class="close">
@@ -251,8 +251,8 @@
 </div> 
 <!-- footer end -->
 
-    <script src="js/index.js"></script>
-    <script src="js/header.js"></script>
+    <script src="<%=request.getContextPath() %>/js/index.js"></script>
+    <script src="<%=request.getContextPath() %>/js/header.js"></script>
 </body>
 
 </html>

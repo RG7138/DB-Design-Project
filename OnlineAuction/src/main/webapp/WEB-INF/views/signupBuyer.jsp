@@ -42,13 +42,13 @@
                 <div class="navigation collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 p-0 text-uppercase">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="index.html">home</a>
+                            <a class="nav-link" aria-current="page" href="/user/home">home</a>
                         </li>
                         <li class="nav-item hotel_bedding">
-                            <a class="nav-link" href="buy.html">buy</a>
+                            <a class="nav-link" href="/buyer/buy">buy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="sell.html" tabindex="-1" aria-disabled="true">sell</a>
+                            <a class="nav-link" href="seller/sell" tabindex="-1" aria-disabled="true">sell</a>
                         </li>
                         <li class="nav-item position-relative services">
                             <a class="nav-link" href="services.html" tabindex="-1" aria-disabled="true">services</a>

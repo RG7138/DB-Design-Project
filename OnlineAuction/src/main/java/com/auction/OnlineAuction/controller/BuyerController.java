@@ -54,4 +54,11 @@ public class BuyerController {
 		return new ModelAndView("login", "user",user);
 		
 	}
+	
+	@GetMapping(value = "/buy")
+	public ModelAndView buy() {
+		
+		return new ModelAndView("buy");
+		
+	}
 }

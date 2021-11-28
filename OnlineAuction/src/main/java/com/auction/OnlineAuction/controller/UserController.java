@@ -6,18 +6,20 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.auction.OnlineAuction.dao.AdminDao;
+import com.auction.OnlineAuction.dao.BuyerDao;
+import com.auction.OnlineAuction.dao.SellerDao;
 import com.auction.OnlineAuction.dao.UserDao;
+import com.auction.OnlineAuction.model.Buyer;
+import com.auction.OnlineAuction.model.Seller;
 import com.auction.OnlineAuction.model.User;
 
 @RestController
@@ -26,6 +28,12 @@ public class UserController {
 
 	@Autowired
 	UserDao userDao;
+	
+	@Autowired
+	BuyerDao buyerDao;
+	
+	@Autowired
+	SellerDao sellerDao;
 	
 	@Autowired
 	AdminDao adminDao;
@@ -44,6 +52,14 @@ public class UserController {
 		
 		List<User> user =  userDao.getUserDetails();
 		return ResponseEntity.ok().body(user);
+		
+	}
+	
+	@GetMapping(value = "/home")
+	public ModelAndView redirectToHome(HttpSession session) {
+		
+		User user = (User) session.getAttribute("user");
+		return new ModelAndView("index","user",user);
 		
 	}
 	
@@ -68,10 +84,25 @@ public class UserController {
 		}
 		else {
 			session.setAttribute("user", loggedInUser);
-			session.setAttribute("role", loggedInUser.getRole());
 			return new ModelAndView("index");
 		}
 		
+		
+	}
+	
+	@GetMapping(value = "/viewProfile")
+	public ModelAndView viewProfile(HttpSession session) {
+		User user = (User)session.getAttribute("user");
+		Object data = null;
+		if(user.getRole().equals("buyer")) {
+			
+			data =  buyerDao.getBuyerByUserId(user.getUserId());
+			return new ModelAndView("profile","data",(Buyer) data);
+			
+		}else {
+			data = sellerDao.getSellerByUserId(user.getUserId());
+			return new ModelAndView("profile","data",(Seller) data);
+		}
 		
 	}
 }

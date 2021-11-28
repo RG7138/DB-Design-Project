@@ -55,4 +55,13 @@ public class SellerController {
 		return new ModelAndView("login", "user",user);
 		
 	}
+	
+	@GetMapping(value = "/sell")
+	public ModelAndView sell() {
+		
+		
+		return new ModelAndView("sell");
+		
+	}
+	
 }

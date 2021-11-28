@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/fonts.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/header.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/footer.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
@@ -45,20 +45,20 @@
                     </div>
                     <div class="logo py-2">
                         <a href="">
-                            <img src="images/headerlogo.png" alt="">
+                            <img src="<%=request.getContextPath() %>/images/headerlogo.png" alt="">
                         </a>
                     </div>
                     <div class="navigation collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0 p-0 text-uppercase">
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="index.html">home</a>
-                            </li>
-                            <li class="nav-item hotel_bedding">
-                                <a class="nav-link" href="buy.html">buy</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="sell.html" tabindex="-1" aria-disabled="true">sell</a>
-                            </li>
+				                <a class="nav-link" aria-current="page" href="/user/home">home</a>
+				              </li>
+				              <li class="nav-item hotel_bedding">
+				                <a class="nav-link" href="/buyer/buy">buy</a>
+				              </li>
+				              <li class="nav-item">
+				                <a class="nav-link" href="/seller/sell" tabindex="-1" aria-disabled="true">sell</a>
+				             </li>
                             <li class="nav-item position-relative services">
                                 <a class="nav-link" href="services.html" tabindex="-1" aria-disabled="true">services</a>
 
@@ -91,7 +91,7 @@
             <div class="navigation_icon d-flex justify-content-between align-items-center border-bottom py-3 px-3 pb-3">
                 <div class="logo">
                     <a href="">
-                        <img src="images/headerlogo.png" alt="">
+                        <img src="<%=request.getContextPath() %>/images/headerlogo.png" alt="">
                     </a>
                 </div>
                 <div class="close">
@@ -179,9 +179,9 @@
     <div class="collection_banner">
         <div class="image_with_text_wrapper position-relative">
             <div class="image_wrap">
-                <img src="images/laptop-shopping-bags-online-shopping-concept.jpg" alt=""
+                <img src="<%=request.getContextPath() %>/images/laptop-shopping-bags-online-shopping-concept.jpg" alt=""
                     class="d-none d-lg-block w-100">
-                <img src="images/hero_banner_mobile.jpg" alt="" class="d-lg-none w-100">
+                <img src="<%=request.getContextPath() %>/images/hero_banner_mobile.jpg" alt="" class="d-lg-none w-100">
             </div>
             <div
                 class="position-absolute text-center container text_wrap min-100 start-0 end-0 top-50 justify-content-start translate-middle-y align-items-center d-flex">
@@ -282,7 +282,7 @@
                             <div class="row" style="row-gap: 60px;">
                                 <div class="col-6 col-lg-4">
                                     <div class="card h-100">
-                                        <a href="product1.html"><img src="images/p1.jpg" alt="img not found "
+                                        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p1.jpg" alt="img not found "
                                                 class="w-100"></a>
                                         <span class="badge position-absolute">74$</span>
                                         <div class="card-body w-100 pt-3">
@@ -297,7 +297,7 @@
                                 </div>
                                 <div class="col-6 col-lg-4">
                                     <div class="card h-100">
-                                        <a href="product1.html"><img src="images/p2.jpg" alt="img not found "
+                                        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p2.jpg" alt="img not found "
                                                 class="w-100"></a>
                                         <span class="badge position-absolute">74$</span>
                                         <div class="card-body w-100 pt-3">
@@ -313,7 +313,7 @@
                                 </div>
                                 <div class="col-6 col-lg-4">
                                     <div class="card h-100">
-                                        <a href="product1.html"><img src="images/p3.jpg" alt="img not found "
+                                        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p3.jpg" alt="img not found "
                                                 class="w-100"></a>
                                         <span class="badge position-absolute">78$</span>
                                         <div class="card-body w-100 pt-3">
@@ -329,7 +329,7 @@
                                 </div>
                                 <div class="col-6 col-lg-4">
                                     <div class="card h-100">
-                                        <a href="product1.html"><img src="images/p4.jpg" alt="img not found "
+                                        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p4.jpg" alt="img not found "
                                                 class="w-100"></a>
                                         <span class="badge position-absolute">88$</span>
                                         <div class="card-body w-100 pt-3">
@@ -345,7 +345,7 @@
                                 </div>
                                 <div class="col-6 col-lg-4">
                                     <div class="card h-100">
-                                        <a href="product1.html"><img src="images/p5.jpg" alt="img not found "
+                                        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p5.jpg" alt="img not found "
                                                 class="w-100"></a>
                                         <span class="badge position-absolute">45$</span>
                                         <div class="card-body w-100 pt-3">
@@ -361,7 +361,7 @@
                                 </div>
                                 <div class="col-6 col-lg-4">
                                     <div class="card h-100">
-                                        <a href="product1.html"><img src="images/p6.jpg" alt="img not found "
+                                        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p6.jpg" alt="img not found "
                                                 class="w-100"></a>
                                         <span class="badge position-absolute">25$</span>
                                         <div class="card-body w-100 pt-3">
@@ -377,7 +377,7 @@
                                 </div>
                                 <div class="col-6 col-lg-4">
                                     <div class="card h-100">
-                                        <a href="product1.html"><img src="images/p7.jpg" alt="img not found "
+                                        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p7.jpg" alt="img not found "
                                                 class="w-100"></a>
                                         <span class="badge position-absolute">50$</span>
                                         <div class="card-body w-100 pt-3">
@@ -393,7 +393,7 @@
                                 </div>
                                 <div class="col-6 col-lg-4">
                                     <div class="card h-100">
-                                        <a href="product1.html"><img src="images/p8.jpg" alt="img not found "
+                                        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p8.jpg" alt="img not found "
                                                 class="w-100"></a>
                                         <span class="badge position-absolute">50$</span>
                                         <div class="card-body w-100 pt-3">
@@ -456,8 +456,8 @@
         </div>
         <!-- footer end -->
 
-        <script src="js/index.js"></script>
-        <script src="js/header.js"></script>
+        <script src="<%=request.getContextPath() %>/js/index.js"></script>
+        <script src="<%=request.getContextPath() %>/js/header.js"></script>
 </body>
 
 </html>

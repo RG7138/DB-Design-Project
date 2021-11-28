@@ -21,4 +21,8 @@ public class SellerDao {
 	public Seller addSeller(Seller seller) {
 		return sellerRepository.save(seller);
 	}
+	
+	public Seller getSellerByUserId(int userId) {
+		return sellerRepository.getSellerByUserId(userId);
+	}
 }

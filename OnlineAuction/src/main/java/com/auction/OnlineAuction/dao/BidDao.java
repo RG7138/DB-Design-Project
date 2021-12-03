@@ -17,4 +17,12 @@ public class BidDao {
 	public List<Bid> getBidDetails() {
 		return bidRepository.findAll();
 	}
+	
+	public List<Bid> getBidDetailsByBuyerId(int buyerId) {
+		return bidRepository.getBidByBuyerId(buyerId);
+	}
+	
+	public Bid saveBid(Bid bid) {
+		return bidRepository.save(bid);
+	}
 }

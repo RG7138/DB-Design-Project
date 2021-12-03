@@ -18,4 +18,9 @@ public class AdminDao {
 		
 		return adminRepository.findAll();
 	}
+	
+	public Admin getAdminByEmailAndPassword(Admin admin) {
+		
+		return adminRepository.getAdminByEmailAndPassword(admin.getEmail(), admin.getPassword());
+	}
 }

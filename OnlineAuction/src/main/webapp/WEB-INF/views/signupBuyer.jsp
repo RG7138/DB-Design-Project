@@ -19,116 +19,24 @@
 
 <body>
 
+ 
   <!-- header strat -->
   <header id="header" class="box-shadow">
     <!-- main header strat -->
     <div class="main_header">
-        <nav class="navbar navbar-expand-xl p-0  px-3 py-3 py-xl-0">
-            <div class="container-fluid">
-                <div class="burger_menu p-0">
-                    <ul class="list-unstyled d-flex p-0 m-0">
-                        <li>
-                            <a href="" class="text-decoration-none d-xl-none" data-bs-toggle="collapse" onclick="mobile_navigation_drawer(event)">
-                                <i class="fas fa-bars text-black"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="logo py-2">
-                    <a href="">
-                        <img src="<%=request.getContextPath() %>/images/headerlogo.png" alt="">
-                    </a>
-                </div>
-                <div class="navigation collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 p-0 text-uppercase">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/user/home">home</a>
-                        </li>
-                        <li class="nav-item hotel_bedding">
-                            <a class="nav-link" href="/buyer/buy">buy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="seller/sell" tabindex="-1" aria-disabled="true">sell</a>
-                        </li>
-                        <li class="nav-item position-relative services">
-                            <a class="nav-link" href="services.html" tabindex="-1" aria-disabled="true">services</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="Feedback.html" tabindex="-1" aria-disabled="true">Feedback</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="icons">
-                    <ul class="navbar-nav p-0 ms-auto">
-                        <li class="nav-item">
-                            <a href="/auction" class="text-black text-uppercase">
-                                sign in/Register
-                            </a>
-                        </li>
-                    </ul>
-                </div>        
-
-            </div>
-        </nav>
+      <nav class="navbar navbar-expand-xl p-0  px-3 py-3 py-xl-0">
+        <div class="container-fluid">
+          <div class="logo py-2" style="justify-content: center;">
+            <a href="">
+              <img src="<%=request.getContextPath() %>/images/headerlogo.png" alt="">
+            </a>
+          </div>
+                   
+        </div>
+      </nav>
     </div>
     <!-- main header end -->
 
-
-
-    <!-- mobile navigation start -->
-    <div class="mobile_navigation">
-        <div class="navigation_icon d-flex justify-content-between align-items-center border-bottom py-3 px-3 pb-3">
-            <div class="logo">
-                <a href="">
-                    <img src="<%=request.getContextPath() %>/images/headerlogo.png" alt="">
-                </a>
-            </div>
-            <div class="close">
-                <a href="" class="text-decoration-none text-black" onclick="mobile_close(event)"><i class="fas fa-times"></i></a>
-            </div>
-        </div>
-
-
-        <ul class="list-unstyled">
-            <li>
-                <div class="px-2 border-top py-4">
-                    <a href="" class="text-uppercase text-decoration-none text-black ">
-                        <h6 class="fw-medium ">home</h6>
-                    </a>
-                </div>
-            </li>
-            <li>
-                <div class="px-2 py-1 ">
-                    <a href="" class="text-uppercase text-decoration-none text-black">
-                        <h6 class="fw-medium">buy</h6>
-                    </a>
-                </div>
-            </li>
-            <li>
-                <div class="px-2  py-4">
-                    <a href="" class="text-uppercase text-decoration-none text-black ">
-                        <h6 class="fw-medium ">sell</h6>
-                    </a>
-                </div>
-            </li>
-            <li>
-                <div class="accordion accordion-flush" id="mobile_navigation">
-                    <div class="accordion-item">
-                        <h6 class="accordion-header" id="link_heading_1">
-                            <a class="accordion-button collapsed text-uppercase text-black text-decoration-none" type="button" data-bs-toggle="collapse" data-bs-target="#link-collapseOne" aria-expanded="false" aria-controls="link-collapseOne">
-                                services
-                            </a>
-                        </h6>
-                    </div>
-                </div>
-            </div>
-        </li>
-    </ul>
-</div>
-<!-- mobile navigation end -->
-</header>
-<!-- header end -->
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <div class="col-sm-8 col-md-6 col-lg-4 p-6 mx-auto text-center bg-white position-relative mt-5">
@@ -157,10 +65,6 @@
                 <!-- Confirm Password -->
                 <input type="password" id="customerConfirmPassword" name="customer[confirmpassword]" aria-label="ConfirmPassword" placeholder="Confirm Password" autocorrect="off" autocapitalize="off" required="required" class="form-control" style="margin-bottom: 15px;">
 
-                <div class="form-check mb-2">
-                    <input type="checkbox" name="customer[accepts_marketing]" aria-label="newsletter subscription" checked="checked" class="form-check-input">
-                    <p class="font-size-small"> By creating an account, you are agreeing that you are at least 13 years old.</p>
-                </div>
                 <button class="btn btn-primary btn-block" type="submit" onclick="return validatePwd()">Register</button>
 
                 <div class="my-5 d-flex align-items-center justify-content-center font-size-small">

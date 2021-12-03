@@ -17,4 +17,8 @@ public class FeedbackDao {
 	public List<Feedback> getFeedbackDetails() {
 		return feedbackRepository.findAll();
 	}
+	
+	public List<Feedback> getFeedbacksBySellerId(int sellerId){
+		return feedbackRepository.getFeedbacksBySellerId(sellerId);
+	}
 }

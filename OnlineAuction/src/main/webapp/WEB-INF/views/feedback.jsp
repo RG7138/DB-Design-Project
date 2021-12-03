@@ -6,17 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback</title>
-    <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/fonts.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/header.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/footer.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
-
+<%@ page import="com.auction.OnlineAuction.model.User" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%
+	HttpSession session1 = request.getSession(false);
+	User user = null;
+	if(session1.getAttribute("user")!=null){
+		
+		user = (User) session1.getAttribute("user");
+	}
+	
+%>
 <body>
 
   <!-- header strat -->
@@ -36,38 +46,60 @@
                 </div>
                 <div class="logo py-2">
                     <a href="">
-                        <img src="images/headerlogo.png" alt="">
+                        <img src="<%=request.getContextPath() %>/images/headerlogo.png" alt="">
                     </a>
                 </div>
                 <div class="navigation collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 p-0 text-uppercase">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="index.html">home</a>
-                        </li>
-                        <li class="nav-item hotel_bedding">
-                            <a class="nav-link" href="buy.html">buy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="sell.html" tabindex="-1" aria-disabled="true">sell</a>
-                        </li>
-                        <li class="nav-item position-relative services">
-                            <a class="nav-link" href="services.html" tabindex="-1" aria-disabled="true">services</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Feedback</a>
-                        </li>
-                    </ul>
-                </div>
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 p-0 text-uppercase">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="/user/home">home</a>
+                            </li>
+                            <%if(user.getRole().equals("buyer")){ %>
+				              <li class="nav-item hotel_bedding">
+				                <a class="nav-link" href="/buyer/buy">buy</a>
+				              </li>
+				              <%} if(user.getRole().equals("seller")){%>
+				              <li class="nav-item">
+				                <a class="nav-link" href="/seller/sell" tabindex="-1" aria-disabled="true">sell</a>
+				              </li>
+				            <%} %>
+                            <li class="nav-item position-relative services">
+                                <a class="nav-link" href="/auction/service" tabindex="-1" aria-disabled="true">services</a>
+
+                            </li>
+                            <%if(user.getRole().equals("buyer")){ %>
+				              <li class="nav-item ">
+                                <a class="nav-link" href="/auction/feedback" tabindex="-1" aria-disabled="true">feedback</a>
+                            </li>
+				              <%} if(user.getRole().equals("seller")){%>
+				              <li class="nav-item ">
+                                <a class="nav-link" href="/feedback/sellerFeedbacks" tabindex="-1" aria-disabled="true">feedback</a>
+                            </li>
+				            <%} %>
+                            <%if(user.getRole().equals("buyer")){ %>
+				              <li class="nav-item hotel_bedding">
+				                <a class="nav-link" href="/bids/getBids">My Bids</a>
+				              </li>
+				              <%} if(user.getRole().equals("seller")){%>
+				              <li class="nav-item">
+				                <a class="nav-link" href="/auctions/getAuctions" tabindex="-1" aria-disabled="true">My Auctions</a>
+				              </li>
+				            <%} %>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="/auction/logout" tabindex="-1" aria-disabled="true">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
 
                 <div class="icons">
-                    <ul class="navbar-nav p-0 ms-auto">
-                        <li class="nav-item">
-                            <a href="login.html" class="text-black text-uppercase">
-                                sign in/Register
-                            </a>
-                        </li>
-                    </ul>
-                </div>        
+		            <ul class="navbar-nav p-0 ms-auto">
+		              <li class="nav-item">
+		                <a href="/user/viewProfile" class="text-black text-uppercase">
+		                  Welcome <%=user.getFname()%> <%=user.getLname()%>
+		                </a>
+		              </li>
+		            </ul>
+		          </div>      
 
             </div>
         </nav>
@@ -286,8 +318,8 @@
 </div>
 </div> 
 <!-- footer end -->
-<script src="js/index.js"></script>
-<script src="js/header.js"></script>
+<script src="<%=request.getContextPath() %>/js/index.js"></script>
+<script src="<%=request.getContextPath() %>/js/header.js"></script>
 </body>
 
 </html>

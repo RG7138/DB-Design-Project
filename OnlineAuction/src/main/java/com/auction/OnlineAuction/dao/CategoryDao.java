@@ -17,4 +17,8 @@ public class CategoryDao {
 	public List<Category> getCategoryDetails() {
 		return categoryRepository.findAll();
 	}
+	
+	public Category getCategoryById(int categoryId) {
+		return categoryRepository.findById(categoryId).get();
+	}
 }

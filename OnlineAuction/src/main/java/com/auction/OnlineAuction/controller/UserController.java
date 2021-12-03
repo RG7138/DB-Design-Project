@@ -5,7 +5,9 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,9 +18,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.auction.OnlineAuction.dao.AdminDao;
 import com.auction.OnlineAuction.dao.BuyerDao;
+import com.auction.OnlineAuction.dao.ProductDao;
 import com.auction.OnlineAuction.dao.SellerDao;
 import com.auction.OnlineAuction.dao.UserDao;
 import com.auction.OnlineAuction.model.Buyer;
+import com.auction.OnlineAuction.model.Product;
 import com.auction.OnlineAuction.model.Seller;
 import com.auction.OnlineAuction.model.User;
 
@@ -38,6 +42,9 @@ public class UserController {
 	@Autowired
 	AdminDao adminDao;
 	
+	@Autowired
+	ProductDao productDao;
+	
 	/*
 	 * @GetMapping(value = "/all") public ModelAndView getAllUsers() {
 	 * 
@@ -56,9 +63,11 @@ public class UserController {
 	}
 	
 	@GetMapping(value = "/home")
-	public ModelAndView redirectToHome(HttpSession session) {
+	public ModelAndView redirectToHome(HttpSession session, Model model) {
 		
 		User user = (User) session.getAttribute("user");
+		List<Product> productList = productDao.getRecommendedProduct(PageRequest.of(0, 4));
+		model.addAttribute("productList",productList);
 		return new ModelAndView("index","user",user);
 		
 	}
@@ -84,7 +93,8 @@ public class UserController {
 		}
 		else {
 			session.setAttribute("user", loggedInUser);
-			return new ModelAndView("index");
+			List<Product> productList = productDao.getRecommendedProduct(PageRequest.of(0, 4));
+			return new ModelAndView("index","productList",productList);
 		}
 		
 		

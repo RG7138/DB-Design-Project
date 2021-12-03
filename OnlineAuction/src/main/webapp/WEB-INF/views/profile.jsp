@@ -68,18 +68,39 @@
                             <li class="nav-item">
                                 <a class="nav-link" aria-current="page" href="/user/home">home</a>
                             </li>
-                            <li class="nav-item hotel_bedding">
-                                <a class="nav-link" href="/buyer/buy">buy</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/seller/sell" tabindex="-1" aria-disabled="true">sell</a>
-                            </li>
+                            <%if(user.getRole().equals("buyer")){ %>
+				              <li class="nav-item hotel_bedding">
+				                <a class="nav-link" href="/buyer/buy">buy</a>
+				              </li>
+				              <%} if(user.getRole().equals("seller")){%>
+				              <li class="nav-item">
+				                <a class="nav-link" href="/seller/sell" tabindex="-1" aria-disabled="true">sell</a>
+				              </li>
+				            <%} %>
                             <li class="nav-item position-relative services">
-                                <a class="nav-link" href="services.html" tabindex="-1" aria-disabled="true">services</a>
+                                <a class="nav-link" href="/auction/service" tabindex="-1" aria-disabled="true">services</a>
 
                             </li>
+                            <%if(user.getRole().equals("buyer")){ %>
+				              <li class="nav-item ">
+                                <a class="nav-link" href="/auction/feedback" tabindex="-1" aria-disabled="true">feedback</a>
+                            </li>
+				              <%} if(user.getRole().equals("seller")){%>
+				              <li class="nav-item ">
+                                <a class="nav-link" href="/feedback/sellerFeedbacks" tabindex="-1" aria-disabled="true">feedback</a>
+                            </li>
+				            <%} %>
+                            <%if(user.getRole().equals("buyer")){ %>
+				              <li class="nav-item hotel_bedding">
+				                <a class="nav-link" href="/bids/getBids">My Bids</a>
+				              </li>
+				              <%} if(user.getRole().equals("seller")){%>
+				              <li class="nav-item">
+				                <a class="nav-link" href="/auctions/getAuctions" tabindex="-1" aria-disabled="true">My Auctions</a>
+				              </li>
+				            <%} %>
                             <li class="nav-item ">
-                                <a class="nav-link" href="Feedback.html" tabindex="-1" aria-disabled="true">feedback</a>
+                                <a class="nav-link" href="/auction/logout" tabindex="-1" aria-disabled="true">Logout</a>
                             </li>
                         </ul>
                     </div>
@@ -183,7 +204,9 @@
     <div class="col-sm-8 col-md-6 col-lg-4 p-6 mx-auto text-center bg-white position-relative mt-5">
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab">
-                <form:form method="post" action="/user/updateProfile" id="customer_login" accept-charset="UTF-8" modelAttribute="data">
+            	
+                <% if(user.getRole().equals("buyer")){ %>
+                <form:form method="post" action="/buyer/updateProfile" id="customer_login" accept-charset="UTF-8" modelAttribute="data">
                     <!-- First Name -->
                     <div class="row pt-4">
                         <div class="col-md-3"><label style="margin-top: 7px;">First Name</label></div>
@@ -223,7 +246,7 @@
                         </div>
                     </div>
                     
-                    <% if(user.getRole().equals("buyer")){ %>
+                    
                     <!-- Shipping Address -->
                     <div class="row pt-4">
                        <div class="col-md-3"><label style="margin-top: 7px;">Shipping Address</label></div>
@@ -233,7 +256,7 @@
                            class="form-control" style="margin-bottom: 15px;" path="shippingAddress"></form:textarea>
                        </div>
                    </div>
-                    <%} %>
+                    
                    
                     <!-- Phone Number -->
                     <div class="row pt-4">
@@ -245,29 +268,6 @@
                         </div>
                     </div>
                     
-                    <% if(user.getRole().equals("seller")){ %>
-                    <!-- Routing Number -->
-
-                    <div class="row pt-4">
-                        <div class="col-md-3"><label style="margin-top: 7px;">Routing No.</label></div>
-                        <div class="col-md-9 form-group">
-                            <form:input type="text" id="routing" name="routing" aria-label="routing" placeholder="Routing Number"
-                        required="required" class="form-control ml-2" style="margin-bottom: 15px;" path="routingNumber"/>
-                        </div>
-                    </div>
-                    
-
-                                     
-                    <!-- Account Number -->
-                    <div class="row pt-4">
-                        <div class="col-md-3"><label style="margin-top: 7px;">Account No.</label></div>
-                        <div class="col-md-9 form-group">
-                            <form:input type="text" id="account" name="account" aria-label="account" placeholder="Account Number"
-                            required="required" class="form-control ml-2" style="margin-bottom: 15px;" path="accountNumber"/>
-                        </div>
-                    </div>
-                    <%} %>
-                   
                     <!-- Password -->
                     <div class="row pt-4">
                         <div class="col-md-3"><label style="margin-top: 7px;">Password</label></div>
@@ -290,8 +290,110 @@
                     </div>
 
                     
-                    <a href="Login.html" class="btn btn-primary btn-block mt-3">Update</a>
+                    <button type = "submit" class="btn btn-primary btn-block mt-3">Update</button>
             </form:form>
+                    <%} %>
+                    <% if(user.getRole().equals("seller")){ %>
+                    
+                    <form:form method="post" action="/seller/updateProfile" id="customer_login" accept-charset="UTF-8" modelAttribute="data">
+                    <!-- First Name -->
+                    <div class="row pt-4">
+                        <div class="col-md-3"><label style="margin-top: 7px;">First Name</label></div>
+                        <div class="col-md-9 form-group">
+                            <form:input type="text" id="registerCustomerFirstName" name="customer[first_name]"
+                        aria-label="first name" placeholder="First Name" required="required" class="form-control mr-2"
+                        style="margin-right: 6px; margin-bottom: 15px;" path="user.fname" disabled="true"/>
+                        </div>
+                    </div>
+                    <!-- Last Name -->
+                    <div class="row pt-4">
+                        <div class="col-md-3"><label style="margin-top: 7px;">Last Name</label></div>
+                        <div class="col-md-9 form-group">
+                            
+                    <form:input type="text" id="customerLastName" name="customer[last_name]" aria-label="last name"
+                    placeholder="Last Name" required="required" class="form-control ml-2"
+                    style="margin-bottom: 15px;" path="user.lname" disabled="true"/>
+                        </div>
+                    </div>
+                    <!-- Email -->
+                    <div class="row pt-4">
+                        <div class="col-md-3"><label style="margin-top: 7px;">Email</label></div>
+                        <div class="col-md-9 form-group">
+                            <form:input type="email" id="customerEmail" name="customer[email]" aria-label="email" placeholder="Email"
+                            autocorrect="off" autocapitalize="off" required="required" class="form-control"
+                            style="margin-bottom: 15px;" path="user.email" disabled="true"/>
+                        </div>
+                    </div>
+                    
+                    <!-- Address -->
+                    <div class="row pt-4">
+                        <div class="col-md-3"><label style="margin-top: 7px;">Address</label></div>
+                        <div class="col-md-9 form-group">
+                            <form:textarea rows="3" type="text" id="customerAddress" name="customer[address]" aria-label="address"
+                            placeholder="Address" autocorrect="off" autocapitalize="off" required="required"
+                            class="form-control" style="margin-bottom: 15px;" path="user.address"></form:textarea>
+                        </div>
+                    </div>
+                    
+                    
+                    <!-- Routing Number -->
+
+                    <div class="row pt-4">
+                        <div class="col-md-3"><label style="margin-top: 7px;">Routing No.</label></div>
+                        <div class="col-md-9 form-group">
+                            <form:input type="text" id="routing" name="routing" aria-label="routing" placeholder="Routing Number"
+                        required="required" class="form-control ml-2" style="margin-bottom: 15px;" path="routingNumber"/>
+                        </div>
+                    </div>
+                    
+
+                                     
+                    <!-- Account Number -->
+                    <div class="row pt-4">
+                        <div class="col-md-3"><label style="margin-top: 7px;">Account No.</label></div>
+                        <div class="col-md-9 form-group">
+                            <form:input type="text" id="account" name="account" aria-label="account" placeholder="Account Number"
+                            required="required" class="form-control ml-2" style="margin-bottom: 15px;" path="accountNumber"/>
+                        </div>
+                    </div>
+                    
+                    <!-- Phone Number -->
+                    <div class="row pt-4">
+                        <div class="col-md-3"><label style="margin-top: 7px;">Phone</label></div>
+                        <div class="col-md-9 form-group">
+                            <form:input type="tel" maxlength="10" id="customerNumber" name="customer[number]" aria-label="number"
+                            placeholder="Phone Number" autocorrect="off" autocapitalize="off" required="required"
+                            class="form-control" style="margin-bottom: 15px;" path="user.phoneNumber"/>
+                        </div>
+                    </div>
+                    
+                    <!-- Password -->
+                    <div class="row pt-4">
+                        <div class="col-md-3"><label style="margin-top: 7px;">Password</label></div>
+                        <div class="col-md-9 form-group">
+                            <form:input type="password" id="customerPassword" name="customer[password]" aria-label="password"
+                            placeholder="Password" autocorrect="off" autocapitalize="off" required="required"
+                            class="form-control" style="margin-bottom: 15px;" path="user.password"/>
+                        
+                        </div>
+                    </div>
+                    <!-- Confirm Password -->
+                    <div class="row pt-4">
+                        <div class="col-md-3"><label style="margin-top: 7px;">Confirm Password</label></div>
+                        <div class="col-md-9 form-group">
+                            <input type="password" id="customerConfirmPassword" name="customer[confirmpassword]"
+                            aria-label="ConfirmPassword" placeholder="Confirm Password" autocorrect="off"
+                            autocapitalize="off" required="required" class="form-control" style="margin-bottom: 15px;"  >
+        
+                        </div>
+                    </div>
+
+                    
+                    <button type = "submit" class="btn btn-primary btn-block mt-3">Update</button>
+            </form:form>
+                    <%} %>
+                   
+                    
             </div>
         </div>
     </div>
@@ -300,8 +402,7 @@
         <div class="copyright">
             <p>
                 Copyright &copy;
-                <script data-cfasync="false"
-                    src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+                
                 <script>document.write(new Date().getFullYear());</script> All rights reserved by <span
                     style="text-decoration: underline;">Online Auction Platform</span>
             </p>
@@ -313,10 +414,9 @@
 
     <!-- js -->
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-    <script src="<%=request.getContextPath() %>/js/popper_min.js"></script>
-    <script src="<%=request.getContextPath() %>/js/bootstrap.js"></script>
+    
     <script src="<%=request.getContextPath() %>/js/index.js"></script>
-    <script src="<%=request.getContextPath() %>/js/product.js"></script>
+    <script src="<%=request.getContextPath() %>/js/header.js"></script>
 <script type="text/javascript">
     function validatePwd() {
         var password = document.getElementById("customerPassword").value;

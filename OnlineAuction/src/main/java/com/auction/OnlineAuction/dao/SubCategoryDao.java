@@ -17,4 +17,12 @@ public class SubCategoryDao {
 	public List<SubCategory> getSubCategoryDetails() {
 		return subCategoryRepository.findAll();
 	}
+	
+	public List<SubCategory> getSubCategoryByCategoryId(int categoryId){
+		return subCategoryRepository.getSubCategoryByCategoryId(categoryId);
+	}
+	
+	public SubCategory getSubCategoryById(int subCategoryId){
+		return subCategoryRepository.findById(subCategoryId).get();
+	}
 }

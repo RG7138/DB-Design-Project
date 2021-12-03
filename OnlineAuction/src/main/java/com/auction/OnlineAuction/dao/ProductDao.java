@@ -3,6 +3,7 @@ package com.auction.OnlineAuction.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.auction.OnlineAuction.model.Product;
@@ -16,5 +17,17 @@ public class ProductDao {
 	
 	public List<Product> getProductDetails() {
 		return productRepository.findAll();
+	}
+	
+	public Product saveProduct(Product product) {
+		return productRepository.save(product);
+	}
+	
+	public List<Product> getRecommendedProduct(PageRequest pageRequest){
+		return productRepository.getRecommendedProducts(pageRequest);
+	}
+	
+	public Product getProductByProductId(int productId) {
+		return productRepository.findById(productId).get();
 	}
 }

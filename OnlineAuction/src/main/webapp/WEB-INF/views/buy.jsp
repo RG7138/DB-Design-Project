@@ -25,7 +25,17 @@
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="css/buy.css">
 </head>
-
+<%@ page import="com.auction.OnlineAuction.model.User" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%
+	HttpSession session1 = request.getSession(false);
+	User user = null;
+	if(session1.getAttribute("user")!=null){
+		
+		user = (User) session1.getAttribute("user");
+	}
+	
+%>
 <body>
     <!-- header strat -->
     <header id="header" class="box-shadow">
@@ -51,33 +61,53 @@
                     <div class="navigation collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0 p-0 text-uppercase">
                             <li class="nav-item">
-				                <a class="nav-link" aria-current="page" href="/user/home">home</a>
-				              </li>
+                                <a class="nav-link" aria-current="page" href="/user/home">home</a>
+                            </li>
+                            <%if(user.getRole().equals("buyer")){ %>
 				              <li class="nav-item hotel_bedding">
 				                <a class="nav-link" href="/buyer/buy">buy</a>
 				              </li>
+				              <%} if(user.getRole().equals("seller")){%>
 				              <li class="nav-item">
 				                <a class="nav-link" href="/seller/sell" tabindex="-1" aria-disabled="true">sell</a>
-				             </li>
+				              </li>
+				            <%} %>
                             <li class="nav-item position-relative services">
-                                <a class="nav-link" href="services.html" tabindex="-1" aria-disabled="true">services</a>
-
+                                <a class="nav-link" href="/auction/service" tabindex="-1" aria-disabled="true">services</a>
                             </li>
+                            <%if(user.getRole().equals("buyer")){ %>
+				              <li class="nav-item ">
+                                <a class="nav-link" href="/auction/feedback" tabindex="-1" aria-disabled="true">feedback</a>
+                            </li>
+				              <%} if(user.getRole().equals("seller")){%>
+				              <li class="nav-item ">
+                                <a class="nav-link" href="/feedback/sellerFeedbacks" tabindex="-1" aria-disabled="true">feedback</a>
+                            </li>
+				            <%} %>
+                            <%if(user.getRole().equals("buyer")){ %>
+				              <li class="nav-item hotel_bedding">
+				                <a class="nav-link" href="/bids/getBids">My Bids</a>
+				              </li>
+				              <%} if(user.getRole().equals("seller")){%>
+				              <li class="nav-item">
+				                <a class="nav-link" href="/auctions/getAuctions" tabindex="-1" aria-disabled="true">My Auctions</a>
+				              </li>
+				            <%} %>
                             <li class="nav-item ">
-                                <a class="nav-link" href="Feedback.html" tabindex="-1" aria-disabled="true">feedback</a>
+                                <a class="nav-link" href="/auction/logout" tabindex="-1" aria-disabled="true">Logout</a>
                             </li>
                         </ul>
                     </div>
 
                     <div class="icons">
-                        <ul class="navbar-nav p-0 ms-auto">
-                            <li class="nav-item">
-                                <a href="login.html" class="text-black text-uppercase">
-                                    sign in/Register
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+			            <ul class="navbar-nav p-0 ms-auto">
+			              <li class="nav-item">
+			                <a href="/user/viewProfile" class="text-black text-uppercase">
+			                  Welcome <%=user.getFname()%> <%=user.getLname()%>
+			                </a>
+			              </li>
+			            </ul>
+		          </div>        
 
                 </div>
             </nav>
@@ -282,16 +312,16 @@
                             <div class="row" style="row-gap: 60px;">
                                 <div class="col-6 col-lg-4">
                                     <div class="card h-100">
-                                        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p1.jpg" alt="img not found "
+                                        <a href="/product/product1"><img src="<%=request.getContextPath() %>/images/p1.jpg" alt="img not found "
                                                 class="w-100"></a>
                                         <span class="badge position-absolute">74$</span>
                                         <div class="card-body w-100 pt-3">
                                             <h5 class="">
-                                                <a href="product1.html"
+                                                <a href="/product/product1"
                                                     class="text-decoration-none fw-bold text-primary-Regal_Blue text-capitalize text-dark-coffee">black
                                                     shoes</a>
                                             </h5>
-                                            <a href="product1.html" class="btn btn-primary-outline">submit a bid</a>
+                                            <a href="/product/product1" class="btn btn-primary-outline">submit a bid</a>
                                         </div>
                                     </div>
                                 </div>

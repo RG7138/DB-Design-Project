@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.auction.OnlineAuction.model.Buyer;
 import com.auction.OnlineAuction.model.User;
 import com.auction.OnlineAuction.repository.UserRepository;
 
@@ -25,5 +27,14 @@ public class UserDao {
 	public User userLogin(String email, String password) {
 		User user = userRepository.getUserByEmailAndPassword(email, password);
 		return user;
+	}
+	
+	@Transactional
+	public int updateUser(User user) {
+		
+		  int updatedRows = userRepository.updateUser(user.getAddress(), user.getPhoneNumber(), user.getPassword(), user.getUserId()); 
+		  return updatedRows;
+		 
+
 	}
 }

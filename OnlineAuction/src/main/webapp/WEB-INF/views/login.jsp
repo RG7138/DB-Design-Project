@@ -31,8 +31,22 @@
 <body style="min-height: 100vh;">
 
     <!-- header strat -->
-
-    <!-- header end -->
+  <header id="header" class="box-shadow">
+    <!-- main header strat -->
+    <div class="main_header">
+      <nav class="navbar navbar-expand-xl p-0  px-3 py-3 py-xl-0">
+        <div class="container-fluid">
+          <div class="logo py-2" style="justify-content: center;">
+            <a href="">
+              <img src="<%=request.getContextPath() %>/images/headerlogo.png" alt="">
+            </a>
+          </div>
+                   
+        </div>
+      </nav>
+    </div>
+    </header>
+    <!-- main header end -->
 
 	<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     <div class="col-sm-8 col-md-6 col-lg-4 p-6 mx-auto text-center bg-white position-relative mt-5 mb-5">

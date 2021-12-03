@@ -228,7 +228,7 @@
       <div class="container">
         <div class="heading text-center">
           <h4 class=" fst-italic fw-semi-bold h4-secondary text-capitalize">auctions</h4>
-          <h2 class=" fw-bold text-capitalize">items in auction</h2>
+          <h2 class=" fw-bold text-capitalize">Recommended items in auction</h2>
         </div>
         <div class="product-main">
           <div class="product-links">

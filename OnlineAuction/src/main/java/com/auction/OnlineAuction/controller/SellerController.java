@@ -107,7 +107,9 @@ public class SellerController {
 		String path = "E:\\UTD\\Database Design\\Project\\Phase 4\\DB-Design-Project\\OnlineAuction\\src\\main\\resources\\static\\images\\product";
 		//String path = session.getServletContext().getRealPath("/product");
 
-        String fileName = "\\" + product.getProductName() + ".jpg";
+		String productName = product.getProductName();
+		productName.replace(" ","%20");
+        String fileName = "\\" + productName + ".jpg";
         try {
             byte[] b = file.getBytes();
             BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(path + fileName));

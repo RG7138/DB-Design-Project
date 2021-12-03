@@ -88,40 +88,39 @@ $(document).ready(function() {
     </header>
     <!-- main header end -->
 	<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-    <h2 style="font-family: 'lato'; text-align: center; padding-top: 10px;">Users</h2>
+    <h2 style="font-family: 'lato'; text-align: center; padding-top: 10px;">Feedbacks</h2>
 	<div class="ml-4 mt-4 mr-4">
 	<table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>Role</th>
-                <th>Action</th>
+                <th>Feedback from</th>
+                <th>Feedback to</th>
+                <th>Feedback for</th>
+                <th>Rating</th>
+                <th>Comments</th>
+                
             </tr>
         </thead>
         <tbody>
-        <c:forEach items="${users }" var="user">
+        <c:forEach items="${feedbacks }" var="feedback">
             <tr>
-                <td>${user.fname }</td>
-                <td>${user.lname }</td>
-                <td>${user.email }</td>
-                <td>${user.phoneNumber }</td>
-                <td>${user.role }</td>
-                <td><a href="/admin/delete/${user.userId }" style="color: red">Deacticate</a></td>
+                <td>${feedback.buyer.user.fname}</td>
+                <td>${feedback.seller.user.fname }</td>
+                <td>${feedback.product.productName }</td>
+                <td>${feedback.rating }</td>
+                <td>${feedback.comments }</td>
+                
             </tr>
             </c:forEach>
             
             </tbody>
         <tfoot>
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>Role</th>
-                <th>Action</th>
+                 <th>Feedback from</th>
+                <th>Feedback to</th>
+                <th>Feedback for</th>
+                <th>Rating</th>
+                <th>Comments</th>
             </tr>
         </tfoot>
     </table>

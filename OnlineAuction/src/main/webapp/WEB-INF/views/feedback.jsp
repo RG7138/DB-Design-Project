@@ -162,20 +162,20 @@
 </header>
 <!-- header end -->
 
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="col-sm-8 col-md-6 col-lg-4 p-6 mx-auto text-center bg-white position-relative mt-5">
     <ul class="nav nav-pills mb-3 mx-auto" id="pills-tab" role="tablist">
-        <li class="nav-item" role="presentation">
+        <!-- <li class="nav-item" role="presentation">
             <button class="nav-link active" id="pills-login-tab" data-bs-toggle="pill" data-bs-target="#pills-login"
             type="button" role="tab" aria-controls="pills-login" aria-selected="true">Feedback for Admin</button>
-        </li>
+        </li> -->
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="pills-signup-tab" data-bs-toggle="pill" data-bs-target="#pills-signup"
+            <button class="nav-link active" id="pills-signup-tab" data-bs-toggle="pill" data-bs-target="#pills-signup"
             type="button" role="tab" aria-controls="pills-signup" aria-selected="false">Feedback for Product</button>
         </li>
     </ul>
     <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab">
+       <!--  <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab">
             <div class="site-section mt-3">
                 <div class="container">
                     <div class="row">
@@ -223,71 +223,62 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="tab-pane fade" id="pills-signup" role="tabpanel" aria-labelledby="pills-signup-tab">
+        </div> -->
+        <div class="tab-pane fade show active" id="pills-signup" role="tabpanel" aria-labelledby="pills-signup-tab">
             <div class="site-section mt-3">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 mx-auto text-center bg-white position-relative  my-4">
+                            
+                            <form:form method="post" action="/feedback/sendFeedback" modelAttribute="feedback">
                             <div class="row" style="margin-bottom: 15px;">
                                 <div class="col-md-6 form-group">
-                                    <input type="text" id="fname" class="form-control form-control" placeholder="First Name">
+                                    <input type="text" disabled="disabled" id="fname" class="form-control form-control" value="<%=user.getFname()%>">
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="text" id="lname" class="form-control form-control"  placeholder="Last Name">
+                                    <input type="text" disabled="disabled" id="lname" class="form-control form-control"  value="<%=user.getLname()%>">
                                 </div>
                             </div>
                             <div class="row" style="margin-bottom: 15px;">
                                 <div class="col-md-6 form-group">
-                                    <input type="text" id="eaddress" class="form-control form-control"  placeholder="Email">
+                                    <input type="text" disabled="disabled" id="eaddress" class="form-control form-control"  value="<%=user.getEmail()%>">
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="text" id="tel" class="form-control form-control"  placeholder="Phone">
-                                </div>
-                            </div>
-                            <div class="row" style="margin-bottom: 15px;">
-                                <div class="col-md-12 form-group">
-                                    <input type="text" id="title" class="form-control form-control" placeholder="Product Name">
+                                    <input type="text" disabled="disabled" id="tel" class="form-control form-control"  value="<%=user.getPhoneNumber()%>">
                                 </div>
                             </div>
                             <div class="row" style="margin-bottom: 15px;">
                                 <div class="col-md-12 form-group">
-                                    <select id="category" class="form-control">
-                                        <option value="none" selected disabled hidden>Select a Category</option>
-                                        <option id="sports">Sports</option>
-                                        <option id="decor">Decor</option>
-                                        <option id="electronics">Electronics</option>
-                                        <option id="clothing">Clothing</option>
-                                        <option id="stationary">Stationary</option>
+                                    <select id="selectedProduct" name = "selectedProduct" class="form-control">
+                                        <option value="none" selected disabled hidden>Select a Product</option>
+                                        <c:forEach items="${productList }" var="productItem">
+                                        <option id="${productItem.productId}" value="${productItem.productId}">${productItem.productName }</option>
+                                        </c:forEach>
                                     </select>
                                 </div>
                             </div>
-                            <div class="row" style="margin-top: 15px;">
-                                <div class="col-md-12 form-group">
-                                    <select id="subcategory" class="form-control">
-                                        <option value="none" selected disabled hidden>Select a Sub-Category</option>
-                                        <option id="sportswear">Sports Wear</option>
-                                        <option id="furniture">Furniture</option>
-                                        <option id="phones">Phones</option>
-                                        <option id="lamps">Lamps</option>
-                                        <option id="shirts">Shirts</option>
-                                    </select>
-                                </div>
-                            </div>
+                            
+                            <div class="bid-wrap">
+	                            <div class="row" style="margin-bottom: 15px;">
+		                            <div class="col-md-12 form-group">
+			                           <form:input id="userBid" class="form-control form-control" name="userBid" type="number" placeholder="Rating" max="10" min="1" path="rating"/>
+			                        </div>
+		                        </div>
+                        	</div>
+                        	
+                            
                             <div class="row"  style="margin-top: 15px;">
                                 <div class="col-md-12 form-group" > 
-                                    <textarea name="" id="message" cols="30" rows="10" class="form-control" placeholder="Message"></textarea>
+                                    <form:textarea name="" id="message" cols="30" rows="10" class="form-control" placeholder="Comments" path="comments"></form:textarea>
                                 </div>
                             </div>
-                            <div class="row"  style="margin-top: 15px;">
-                                <div class="col-md-4" style="padding-top: 5px;"><label for="file">Image</label></div>
-                                <div class="col-md-8 form-group"><input type="file" id="file" class="form-control form-control"></div>
-                            </div>  
+                             
                             <div class="row"  style="margin-top: 15px;">
                                 <div class="col-12"  style="text-align: center;">
-                                    <input type="submit" value="Send Message" class="btn btn-primary px-5"> 
+                                    <button type="submit" value="Send Message" class="btn btn-primary px-5">Send Feedback</button>
                                 </div>
                             </div>
+                        </form:form>
                         </div>
                         
                         <div class="mx-auto text-center bg-white position-relative my-3">

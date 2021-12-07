@@ -67,7 +67,10 @@ $(document).ready(function() {
                 <a class="nav-link" href="/admin/feedbacks" tabindex="-1" aria-disabled="true">Feedback</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/admin/logout">Logout</a>
+                <a class="nav-link" href="/category/addCategory" tabindex="-1" aria-disabled="true" >Add Category</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/admin/logout" tabindex="-1" aria-disabled="true">Logout</a>
               </li>
             </ul>
           </div>

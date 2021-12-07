@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ColumnDefault;
+
 @Entity
 @Table(name="user")
 public class User {
@@ -39,6 +41,10 @@ public class User {
 	
 	@Column(name = "lname")
 	private String lname;
+	
+	@Column(name = "status")
+	@ColumnDefault("0")
+	private int status;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "managed_by", referencedColumnName = "admin_id")
@@ -116,11 +122,20 @@ public class User {
 		this.admin = admin;
 	}
 
+	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", email=" + email + ", phoneNumber=" + phoneNumber + ", password=" + password
-				+ ", role=" + role + ", address=" + address + ", fname=" + fname + ", lname=" + lname + ", admin="
-				+ admin + "]";
+				+ ", role=" + role + ", address=" + address + ", fname=" + fname + ", lname=" + lname + ", status="
+				+ status + ", admin=" + admin + "]";
 	}
 	
 }

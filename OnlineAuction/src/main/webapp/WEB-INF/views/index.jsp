@@ -214,15 +214,22 @@
             <h5 class="text-black text-capitalize fw-regular m-0 pt-3">
               best place to buy, sell and save
             </h5>
+            <%if(user.getRole().equals("buyer")){ %>
             <div class="bottom-banner-btn-wrap mt-5">
               <a href="/buyer/buy" class="btn btn-primary">Get started</a>
             </div>
+            <%} if(user.getRole().equals("seller")){ %>
+            <div class="bottom-banner-btn-wrap mt-5">
+              <a href="/seller/sell" class="btn btn-primary">Get started</a>
+            </div>
+            <%} %>
           </div>
         </div>
       </div> 
     </div>
     <!-- hero banner end -->
 
+<%if(user.getRole().equals("buyer")){ %>
     <!-- fetured collection start -->
     <div class="featured-collection-main">
       <div class="container">
@@ -258,6 +265,7 @@
       }
     }
   }'>
+  
   <div class="swiper-wrapper">
   <c:forEach items="${productList }" var="product">
     <div class=" swiper-slide position-relative">
@@ -274,6 +282,7 @@
     </c:forEach>
     
   </div>
+  <%} %>
 </div>
 <div class="swiper-button-next icon-right-arrow fs-20 fw-bold"></div>
 <div class="swiper-button-prev icon-left-arrow fs-20 fw-bold"></div>

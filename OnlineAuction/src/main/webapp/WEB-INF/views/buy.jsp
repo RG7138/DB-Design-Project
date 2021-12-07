@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Buy Products</title>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/fonts.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/header.css">
@@ -23,7 +23,10 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <link rel="stylesheet" href="css/buy.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/buy.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/hero_banner.css">
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/css/featured_collection.css">
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/css/how_it_works.css"> 
 </head>
 <%@ page import="com.auction.OnlineAuction.model.User" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
@@ -222,9 +225,11 @@
                     <h5 class="text-black text-capitalize fw-regular m-0 pt-3">
                         best place to buy, sell and save
                     </h5>
+                    
                     <div class="bottom-banner-btn-wrap mt-5">
-                        <a href="Login.html" class="btn btn-primary">register</a>
+                        <button type="button" class="btn btn-primary" disabled="disabled">Welcome <%=user.getFname()%> <%=user.getLname()%></button>
                     </div>
+                   
                 </div>
             </div>
         </div>
@@ -237,7 +242,7 @@
         <div class="collection_product_list_wrap mt-7">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3 d-none d-lg-block">
+                    <!-- <div class="col-lg-3 d-none d-lg-block">
                         <div class="w-100 ">
                             <h6 class="f-15 text-capitalize border-bootom-1 pb-3">filter by:</h6>
                         </div>
@@ -284,48 +289,36 @@
 
 
                         </div>
-                    </div>
-                    <div class="col-lg-9 col-12">
+                    </div> -->
+                    
+                    <div class="col-lg-12 col-12">
                         <div class="w-100">
                             <div class="d-flex justify-content-between">
                                 <div class="total_product_counts mx-auto m-lg-0">
-                                    <p class="m-0 f-15 text-primary-Regal_Blue fw-regular">76 results</p>
+                                    <p class="m-0 f-15 text-primary-Regal_Blue fw-regular"><c:out value="${listSize }"></c:out> results</p>
                                 </div>
-                                <div class="sorting_products d-none d-lg-block">
-                                    <div class="d-flex align-items-center">
-                                        <h6 class="f-15 text-primary-Regal_Blue text-capitalize m-0">sort by:</h6>
-                                        <select id="sortBy" name="sort-by"
-                                            class="border-0 text-primary-Regal_Blue fw-bold m-0">
-                                            <option value="">Best Selling</option>
-                                            <option value="">Newest</option>
-                                            <option value="title:asc">Name: A - Z</option>
-                                            <option value="">Name: Z - A</option>
-                                            <option value="ss_price:asc">Price: Low to High</option>
-                                            <option value="">Price: High to Low</option>
-                                            <option value="">Highest Rated</option>
-                                        </select>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="w-100 mt-5">
                             <div class="row" style="row-gap: 60px;">
-                                <div class="col-6 col-lg-4">
-                                    <div class="card h-100">
-                                        <a href="/product/product1"><img src="<%=request.getContextPath() %>/images/p1.jpg" alt="img not found "
+                                <c:forEach items="${productList}" var="product">
+                                <div class="col-6 col-lg-3">
+                                    <div class="card h-100 product-img">
+                                        <a href="/product/productDetails?productId=${product.productId}"><img src="<%=request.getContextPath() %>/images/product/${product.productName}.jpg" alt="img not found "
                                                 class="w-100"></a>
-                                        <span class="badge position-absolute">74$</span>
+                                        <span class="badge position-absolute">${product.initialBidPrice}$</span>
                                         <div class="card-body w-100 pt-3">
                                             <h5 class="">
-                                                <a href="/product/product1"
-                                                    class="text-decoration-none fw-bold text-primary-Regal_Blue text-capitalize text-dark-coffee">black
-                                                    shoes</a>
+                                                <a href="/product/productDetails?productId=${product.productId}"
+                                                    class="text-decoration-none fw-bold text-primary-Regal_Blue text-capitalize text-dark-coffee">${product.productName}</a>
                                             </h5>
-                                            <a href="/product/product1" class="btn btn-primary-outline">submit a bid</a>
+                                            <a href="/product/productDetails?productId=${product.productId}" class="btn btn-primary-outline">submit a bid</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-6 col-lg-4">
+                                    </c:forEach>
+                                <%-- <div class="col-6 col-lg-4">
                                     <div class="card h-100">
                                         <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p2.jpg" alt="img not found "
                                                 class="w-100"></a>
@@ -436,7 +429,7 @@
                                             <a href="product1.html" class="btn btn-primary-outline">submit a bid</a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --%>
                             </div>
                         </div>
                     </div>
@@ -446,7 +439,7 @@
 
 
             <!-- collection pagination start -->
-            <div class="collection_pagination mt-5">
+            <!-- <div class="collection_pagination mt-5">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
                         <li class="page-item disabled">
@@ -464,7 +457,7 @@
                         </li>
                     </ul>
                 </nav>
-            </div>
+            </div> -->
             <!-- collection pagination end -->
 
 

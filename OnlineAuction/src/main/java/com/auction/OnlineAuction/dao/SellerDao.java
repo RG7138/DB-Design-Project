@@ -25,4 +25,11 @@ public class SellerDao {
 	public Seller getSellerByUserId(int userId) {
 		return sellerRepository.getSellerByUserId(userId);
 	}
+	
+	public void updateSeller(Seller seller) {
+		Seller originalSeller = sellerRepository.findById(seller.getSellerId()).get();
+		originalSeller.setAccountNumber(seller.getAccountNumber());
+		originalSeller.setRoutingNumber(seller.getRoutingNumber());
+		sellerRepository.save(originalSeller);
+	}
 }

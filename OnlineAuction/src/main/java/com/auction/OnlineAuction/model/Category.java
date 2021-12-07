@@ -23,7 +23,7 @@ public class Category {
 	private String categoryName;
 
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "created_by", referencedColumnName = "admin_id")
 	private Admin admin;
 
@@ -43,7 +43,7 @@ public class Category {
 	}
 
 
-	public void setCategorName(String categoryName) {
+	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
 
@@ -60,7 +60,7 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Category [categoryId=" + categoryId + ", categorName=" + categoryName + ", admin=" + admin + "]";
+		return "Category [categoryId=" + categoryId + ", categoryName=" + categoryName + ", admin=" + admin + "]";
 	}
 
 	

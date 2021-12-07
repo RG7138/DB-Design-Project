@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feedbacks</title>
+  <title>Add Category</title>
   <link rel="stylesheet" href="<%=request.getContextPath() %>/css/fonts.css">
   <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css">
   <link rel="stylesheet" href="<%=request.getContextPath() %>/css/header.css">
@@ -89,56 +89,82 @@ $(document).ready(function() {
       </nav>
     </div>
     </header>
-    <!-- main header end -->
-	<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-    <h2 style="font-family: 'lato'; text-align: center; padding-top: 10px;">Feedbacks</h2>
-	<div class="ml-4 mt-4 mr-4">
-	<table id="example" class="table table-striped table-bordered" style="width:100%">
-        <thead>
-            <tr>
-                <th>Feedback from</th>
-                <th>Feedback to</th>
-                <th>Feedback for</th>
-                <th>Rating</th>
-                <th>Comments</th>
-                
-            </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${feedbacks }" var="feedback">
-            <tr>
-                <td>${feedback.buyer.user.fname}</td>
-                <td>${feedback.seller.user.fname }</td>
-                <td>${feedback.product.productName }</td>
-                <td>${feedback.rating }</td>
-                <td>${feedback.comments }</td>
-                
-            </tr>
-            </c:forEach>
-            
-            </tbody>
-        <tfoot>
-            <tr>
-                 <th>Feedback from</th>
-                <th>Feedback to</th>
-                <th>Feedback for</th>
-                <th>Rating</th>
-                <th>Comments</th>
-            </tr>
-        </tfoot>
-    </table>
+  
+    <!-- header end -->
+
+
+    <!-- PRODUCT MAIN SECTION -->
+	<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+    <div class="user-profile-wrap mt-4" style="padding-top: 25px;">
+        <h1 style="text-align: center;">Add Category</h1>
     </div>
-    </body>
-    
+    <%
+    	if(session.getAttribute("savedCategoryMessage")!=null){
+    		String message = (String) session.getAttribute("savedCategoryMessage");
+    		request.setAttribute("message", message);
+    		%>
+    		<br>
+    		<h2 style="text-align: center; color: red"><c:out value="${message}"></c:out></h2>
+    <%}%>
+    <div class="col-sm-8 col-md-6 col-lg-4 p-6 mx-auto text-center bg-white position-relative mt-5">
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab">
+            	                  
+                    <form:form method="post" action="/category/saveCategory" modelAttribute="category">
+                    
+                    <!-- category Name -->
+                    <div class="row pt-4">
+                        
+                        <div class="col-md-12 form-group">
+                            <form:input type="text" aria-label="category name" placeholder="Category Name" required="required" class="form-control mr-2"
+                        style="margin-right: 6px; margin-bottom: 15px;" path="categoryName"/>
+                        </div>
+                    </div>
+                    
+                    <button type = "submit" class="btn btn-primary btn-block mt-3">Add Category</button>
+            </form:form>
+                    
+                   
+                    
+            </div>
+        </div>
+    </div>
+    <%
+    	if(session.getAttribute("savedCategoryMessage")==null){
+    		%>
+    	
     <!-- footer start -->
-<div class="footer">
-  <div class="copyright">
-    <p>
-      Copyright &copy;<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved by <span style="text-decoration: underline;">Online Auction Platform</span>
-    </p>
-  </div>
-</div> 
-<!-- footer end -->
-    </html>
+    <div class="footer" style="margin-top: 200px">
+        <div class="copyright">
+            <p>
+                Copyright &copy;
+                
+                <script>document.write(new Date().getFullYear());</script> All rights reserved by <span
+                    style="text-decoration: underline;">Online Auction Platform</span>
+            </p>
+        </div>
+    </div>
+    <%}else{ %>
+    <div class="footer" style="margin-top: 100px">
+        <div class="copyright">
+            <p>
+                Copyright &copy;
+                
+                <script>document.write(new Date().getFullYear());</script> All rights reserved by <span
+                    style="text-decoration: underline;">Online Auction Platform</span>
+            </p>
+        </div>
+    </div><%} %>
+    <!-- footer end -->
+
+
+
+    <!-- js -->
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
     
-    
+    <script src="<%=request.getContextPath() %>/js/index.js"></script>
+    <script src="<%=request.getContextPath() %>/js/header.js"></script>
+
+</body>
+
+</html>

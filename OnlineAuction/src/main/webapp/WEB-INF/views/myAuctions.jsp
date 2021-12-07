@@ -100,9 +100,9 @@ $(document).ready(function() {
 			          <div class="icons">
 			            <ul class="navbar-nav p-0 ms-auto">
 			              <li class="nav-item">
-			                <span class="text-black text-uppercase">
-			                  Welcome <%=user.getFname()%> <%=user.getLname() %>
-			                </span>
+			                <a href="/user/viewProfile" class="text-black text-uppercase">
+			                  Welcome <%=user.getFname()%> <%=user.getLname()%>
+			                </a>
 			              </li>
 			            </ul>
 			          </div>        

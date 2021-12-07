@@ -208,6 +208,8 @@
                 <% if(user.getRole().equals("buyer")){ %>
                 <form:form method="post" action="/buyer/updateProfile" id="customer_login" accept-charset="UTF-8" modelAttribute="data">
                     <!-- First Name -->
+                    <form:input type="hidden" path="buyerId"/>
+                    <form:input type="hidden" path="user.userId"/>
                     <div class="row pt-4">
                         <div class="col-md-3"><label style="margin-top: 7px;">First Name</label></div>
                         <div class="col-md-9 form-group">
@@ -296,6 +298,8 @@
                     <% if(user.getRole().equals("seller")){ %>
                     
                     <form:form method="post" action="/seller/updateProfile" id="customer_login" accept-charset="UTF-8" modelAttribute="data">
+                    <form:input type="hidden" path="sellerId"/>
+                    <form:input type="hidden" path="user.userId"/>
                     <!-- First Name -->
                     <div class="row pt-4">
                         <div class="col-md-3"><label style="margin-top: 7px;">First Name</label></div>

@@ -21,4 +21,8 @@ public class CategoryDao {
 	public Category getCategoryById(int categoryId) {
 		return categoryRepository.findById(categoryId).get();
 	}
+	
+	public Category saveCategory(Category category) {
+		return categoryRepository.save(category);
+	}
 }

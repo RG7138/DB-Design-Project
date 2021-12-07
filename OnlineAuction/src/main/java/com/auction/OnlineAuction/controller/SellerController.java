@@ -79,6 +79,7 @@ public class SellerController {
 	public ModelAndView saveSeller(@ModelAttribute("seller") Seller seller) {
 		
 		seller.getUser().setRole("seller");
+		seller.getUser().setStatus(1);
 		seller.getUser().setAdmin(adminDao.getAdminDetails().get(0));
 		User user = userDao.addUser(seller.getUser());
 		seller.getUser().setUserId(user.getUserId());
@@ -108,7 +109,7 @@ public class SellerController {
 		//String path = session.getServletContext().getRealPath("/product");
 
 		String productName = product.getProductName();
-		productName.replace(" ","%20");
+		
         String fileName = "\\" + productName + ".jpg";
         try {
             byte[] b = file.getBytes();
@@ -123,6 +124,7 @@ public class SellerController {
         }
         
         product.setImagePath(path + fileName);
+        product.setMaxBidPrice(product.getInitialBidPrice());
         product.setAdmin(adminDao.getAdminDetails().get(0));
         product.setSubCategory(subCategoryDao.getSubCategoryById(subCategoryId));
         product.getSubCategory().setCategory(categoryDao.getCategoryById(categoryId));
@@ -152,5 +154,15 @@ public class SellerController {
 		model.addAttribute("auctions", auctions);
         
 		return new ModelAndView("myAuctions");
+	}
+	
+	@PostMapping(value = "/updateProfile")
+	public ModelAndView updateBuyer(@ModelAttribute("data") Seller data) {
+		
+		sellerDao.updateSeller(data);
+		userDao.updateUser(data.getUser());
+		
+		return new ModelAndView("profile", "data",data);
+		
 	}
 }

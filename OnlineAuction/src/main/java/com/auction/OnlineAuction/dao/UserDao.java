@@ -17,11 +17,21 @@ public class UserDao {
 	UserRepository userRepository;
 	
 	public List<User> getUserDetails() {
-		return userRepository.findAll();
+		return userRepository.findAllByStatus();
 	}
 	
 	public User addUser(User user) {
 		return userRepository.save(user);
+	}
+	
+	public User getUserById(int userId) {
+		return userRepository.findById(userId).get();
+	}
+	
+	public void deactivateUser(int userId) {
+		User user = getUserById(userId);
+		user.setStatus(0);
+		userRepository.save(user);
 	}
 	
 	public User userLogin(String email, String password) {
@@ -30,11 +40,13 @@ public class UserDao {
 	}
 	
 	@Transactional
-	public int updateUser(User user) {
+	public void updateUser(User user) {
 		
-		  int updatedRows = userRepository.updateUser(user.getAddress(), user.getPhoneNumber(), user.getPassword(), user.getUserId()); 
-		  return updatedRows;
-		 
+		User originalUser = userRepository.findById(user.getUserId()).get();
+		originalUser.setAddress(user.getAddress());
+		originalUser.setPhoneNumber(user.getPhoneNumber());
+		originalUser.setPassword(user.getPassword());
+		userRepository.save(originalUser);
 
 	}
 }

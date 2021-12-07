@@ -38,6 +38,9 @@ public class Product {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "managed_by", referencedColumnName = "admin_id")
 	private Admin admin;
+	
+	@Column(name="image_path")
+	private String imagePath;
 
 	public int getProductId() {
 		return productId;
@@ -94,12 +97,23 @@ public class Product {
 	public void setAdmin(Admin admin) {
 		this.admin = admin;
 	}
+	
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
 
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", productName=" + productName + ", productInfo=" + productInfo
 				+ ", initialBidPrice=" + initialBidPrice + ", maxBidPrice=" + maxBidPrice + ", subCategory="
-				+ subCategory + ", admin=" + admin + "]";
+				+ subCategory + ", admin=" + admin + ", imagePath=" + imagePath + "]";
 	}
+
+	
 
 }

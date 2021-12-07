@@ -14,7 +14,80 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<script>
+
+
+	function showSelected(){
+	console.log("Entering in ajax call");
+	var categoryValue = document.getElementById("category").value;
+	$.ajax({
+		url : "/subCategory/getSubCategory",
+		data : {'categoryid' : categoryValue},
+		type : "get",
+		success : function(response) {
+			$('#subcategory').empty();
+			$('#subcategory').append($('<option>', {
+			    value: "",
+			    text:  'Select Sub-Category'
+			}));
+			for (item in response) {
+				$('#subcategory').append($('<option>', {
+				    value: response[item].subCategoryId,
+				    text:  response[item].subCategoryName
+				}));
+			}
+		},
+		error : function(e) {
+			// alert("Submit failed" + JSON.stringify(e));
+		}
+	});
+   }
+
+
+
+/* $("#category").on("change" , function(){
+	console.log("Entering in ajax call");
+	 var categoryValue = document.getElementById("category").value; 
+	$.ajax({
+		url : getContextPath() + "/subCategory/getSubCategory",
+		data : {'categoryid' : categoryValue},
+		type : "get",
+		success : function(response) {
+			$('#subcategory').empty();
+			$('#subcategory').append($('<option>', {
+			    value: "",
+			    text:  'Select'
+			}));
+			for (item in response) {
+				$('#subcategory').append($('<option>', {
+				    value: response[item].subCatgeoryId,
+				    text:  response[item].subCategoryName
+				}));
+			}
+		},
+		error : function(e) {
+			// alert("Submit failed" + JSON.stringify(e));
+		}
+	});
+}); */
+</script>
+
 </head>
+<%@ page import="com.auction.OnlineAuction.model.User" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%
+	HttpSession session1 = request.getSession(false);
+	User user = null;
+	if(session1.getAttribute("user")!=null){
+		
+		user = (User) session1.getAttribute("user");
+	}
+	
+%>
 
 <body>
     <!-- header strat -->
@@ -40,32 +113,54 @@
                     <div class="navigation collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0 p-0 text-uppercase">
                             <li class="nav-item">
-				                <a class="nav-link" aria-current="page" href="/user/home">home</a>
-				              </li>
+                                <a class="nav-link" aria-current="page" href="/user/home">home</a>
+                            </li>
+                            <%if(user.getRole().equals("buyer")){ %>
 				              <li class="nav-item hotel_bedding">
 				                <a class="nav-link" href="/buyer/buy">buy</a>
 				              </li>
+				              <%} if(user.getRole().equals("seller")){%>
 				              <li class="nav-item">
 				                <a class="nav-link" href="/seller/sell" tabindex="-1" aria-disabled="true">sell</a>
-				             </li>
+				              </li>
+				            <%} %>
                             <li class="nav-item position-relative services">
-                                <a class="nav-link" href="services.html" tabindex="-1" aria-disabled="true">services</a>
+                                <a class="nav-link" href="/auction/service" tabindex="-1" aria-disabled="true">services</a>
+
                             </li>
+                            <%if(user.getRole().equals("buyer")){ %>
+				              <li class="nav-item ">
+                                <a class="nav-link" href="/auction/feedback" tabindex="-1" aria-disabled="true">feedback</a>
+                            </li>
+				              <%} if(user.getRole().equals("seller")){%>
+				              <li class="nav-item ">
+                                <a class="nav-link" href="/feedback/sellerFeedbacks" tabindex="-1" aria-disabled="true">feedback</a>
+                            </li>
+				            <%} %>
+                            <%if(user.getRole().equals("buyer")){ %>
+				              <li class="nav-item hotel_bedding">
+				                <a class="nav-link" href="/bids/getBids">My Bids</a>
+				              </li>
+				              <%} if(user.getRole().equals("seller")){%>
+				              <li class="nav-item">
+				                <a class="nav-link" href="/auctions/getAuctions" tabindex="-1" aria-disabled="true">My Auctions</a>
+				              </li>
+				            <%} %>
                             <li class="nav-item ">
-                                <a class="nav-link" href="Feedback.html" tabindex="-1" aria-disabled="true">Feedback</a>
+                                <a class="nav-link" href="/auction/logout" tabindex="-1" aria-disabled="true">Logout</a>
                             </li>
                         </ul>
                     </div>
 
                     <div class="icons">
-                        <ul class="navbar-nav p-0 ms-auto">
-                            <li class="nav-item">
-                                <a href="login.html" class="text-black text-uppercase">
-                                    sign in/Register
-                                </a>
-                            </li>
-                        </ul>
-                    </div>        
+			            <ul class="navbar-nav p-0 ms-auto">
+			              <li class="nav-item">
+			                <a href="/user/viewProfile" class="text-black text-uppercase">
+			                  Welcome <%=user.getFname()%> <%=user.getLname()%>
+			                </a>
+			              </li>
+			            </ul>
+		          </div>         
                
                 </div>
               </nav>
@@ -156,20 +251,21 @@
     </header>
 <!-- header end -->
 
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     <div class="site-section">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 mx-auto text-center bg-white position-relative  my-4">
                     <h2>Upload Product Details</h2>
+                    <form:form action="/seller/addProduct" modelAttribute="product" method="post" enctype="multipart/form-data">
                     <div class="row" style="margin-bottom: 15px;">
                         <div class="col-md-12 form-group">
-                            <input type="text" id="title" class="form-control form-control" placeholder="Title">
+                            <form:input type="text" id="title" class="form-control form-control" placeholder="Product Name" path="productName"/>
                         </div>
                     </div>
                     <div class="row" style="margin-bottom: 15px;">
                         <div class="col-md-12 form-group">
-                            <textarea name="description" id="description" cols="30" rows="5" class="form-control" placeholder="Description"></textarea>
+                            <form:textarea name="description" id="description" cols="30" rows="5" class="form-control" placeholder="Description" path="productInfo"></form:textarea>
                         </div>
                     </div>
                     <div class="row">
@@ -179,7 +275,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text">$</span>
                             </div>
-                            <input type="text" class="form-control" id="initialprice" aria-label="Amount (to the nearest dollar)">
+                            <form:input type="text" class="form-control" id="initialprice" aria-label="Amount (to the nearest dollar)" path="initialBidPrice"/>
                             <div class="input-group-append">
                               <span class="input-group-text">.00</span>
                             </div>
@@ -190,27 +286,20 @@
                     <div class="row">
                         <div class="col-md-4" style="padding-top: 5px;"><label for="file">Select Category</label></div>
                         <div class="col-md-8 form-group">
-                            <select id="category" class="form-control">
-                                <option value="none" selected disabled hidden>Select a Category</option>
-                                <option id="sports">Sports</option>
-                                <option id="decor">Decor</option>
-                                <option id="electronics">Electronics</option>
-                                <option id="clothing">Clothing</option>
-                                <option id="stationary">Stationary</option>
-                                </select>
+                            <select id="category" name="category" class="form-control" onChange='showSelected()'>
+                            	<option value="" selected>Select Category</option>
+                            <c:forEach items="${categoryList }" var="category">
+                                <option value="${category.categoryId }">${category.categoryName }</option>
+                            </c:forEach>
+                            </select>
                         </div>
                     </div>
 
                     <div class="row" style="margin-top: 15px;">
                         <div class="col-md-4" style="padding-top: 5px;"><label for="file">Select Sub-category</label></div>
                         <div class="col-md-8 form-group">
-                            <select id="subcategory" class="form-control">
+                            <select id="subcategory" name="subcategory" class="form-control">
                                 <option value="none" selected disabled hidden>Select a Sub-Category</option>
-                                <option id="sportswear">Sports Wear</option>
-                                <option id="furniture">Furniture</option>
-                                <option id="phones">Phones</option>
-                                <option id="lamps">Lamps</option>
-                                <option id="shirts">Shirts</option>
                             </select>
                         </div>
                     </div>
@@ -220,13 +309,13 @@
                         </div>
                         <div class="col-md-8 form-group">
                             <div class="input-group mb-3">
-                                <input type="date" class="form-control" id="bidstartdate" placeholder="Bid Start Date">
+                                <input type="date" name="bidstartdate" class="form-control" id="bidstartdate" placeholder="Bid Start Date">
                             </div>
                         </div>
                     </div>
                     <div class="row"  style="margin-top: 15px;">
                         <div class="col-md-4" style="padding-top: 5px;"><label for="file">Image</label></div>
-                        <div class="col-md-8 form-group"><input type="file" id="file" class="form-control form-control"></div>
+                        <div class="col-md-8 form-group"><input type="file" id="file" name="file" class="form-control form-control" accept="image/png, image/jpeg, image/jpg"></div>
                     </div>
 
                     <div class="row"  style="margin-top: 15px;">
@@ -234,6 +323,7 @@
                             <input type="submit" value="Upload" class="btn btn-primary px-5"> 
                         </div>
                     </div>
+                    </form:form>
                 </div>
                 
             </div>

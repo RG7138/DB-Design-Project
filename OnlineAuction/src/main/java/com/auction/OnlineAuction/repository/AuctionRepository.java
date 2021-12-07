@@ -12,10 +12,10 @@ import com.auction.OnlineAuction.model.Auction;
 @Repository
 public interface AuctionRepository extends JpaRepository<Auction, Integer>{
 
-	@Query("from Auction a where a.product= :product_id")
-	public List<Auction> getAllproducts(@Param("product_id") int product_id);
 	
-	@Query("from Auction a where a.seller= :seller_id")
-	public List<Auction> getAllproductsForSeller(@Param("seller_id") int seller_id);
+	@Query("Select a from Auction a where a.seller.sellerId = :sellerId")
+	public List<Auction> getAuctionBySellerId(@Param("sellerId") int sellerId);
 	
+	@Query("Select a from Auction a where a.product.productId = :productId")
+	public List<Auction> getAuctionByProductId(@Param("productId") int productId);
 }

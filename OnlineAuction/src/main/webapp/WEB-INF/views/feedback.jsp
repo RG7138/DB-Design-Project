@@ -6,17 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback</title>
-    <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/fonts.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/header.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/footer.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
-
+<%@ page import="com.auction.OnlineAuction.model.User" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%
+	HttpSession session1 = request.getSession(false);
+	User user = null;
+	if(session1.getAttribute("user")!=null){
+		
+		user = (User) session1.getAttribute("user");
+	}
+	
+%>
 <body>
 
   <!-- header strat -->
@@ -36,38 +46,60 @@
                 </div>
                 <div class="logo py-2">
                     <a href="">
-                        <img src="images/headerlogo.png" alt="">
+                        <img src="<%=request.getContextPath() %>/images/headerlogo.png" alt="">
                     </a>
                 </div>
                 <div class="navigation collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 p-0 text-uppercase">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="index.html">home</a>
-                        </li>
-                        <li class="nav-item hotel_bedding">
-                            <a class="nav-link" href="buy.html">buy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="sell.html" tabindex="-1" aria-disabled="true">sell</a>
-                        </li>
-                        <li class="nav-item position-relative services">
-                            <a class="nav-link" href="services.html" tabindex="-1" aria-disabled="true">services</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Feedback</a>
-                        </li>
-                    </ul>
-                </div>
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 p-0 text-uppercase">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="/user/home">home</a>
+                            </li>
+                            <%if(user.getRole().equals("buyer")){ %>
+				              <li class="nav-item hotel_bedding">
+				                <a class="nav-link" href="/buyer/buy">buy</a>
+				              </li>
+				              <%} if(user.getRole().equals("seller")){%>
+				              <li class="nav-item">
+				                <a class="nav-link" href="/seller/sell" tabindex="-1" aria-disabled="true">sell</a>
+				              </li>
+				            <%} %>
+                            <li class="nav-item position-relative services">
+                                <a class="nav-link" href="/auction/service" tabindex="-1" aria-disabled="true">services</a>
+
+                            </li>
+                            <%if(user.getRole().equals("buyer")){ %>
+				              <li class="nav-item ">
+                                <a class="nav-link" href="/auction/feedback" tabindex="-1" aria-disabled="true">feedback</a>
+                            </li>
+				              <%} if(user.getRole().equals("seller")){%>
+				              <li class="nav-item ">
+                                <a class="nav-link" href="/feedback/sellerFeedbacks" tabindex="-1" aria-disabled="true">feedback</a>
+                            </li>
+				            <%} %>
+                            <%if(user.getRole().equals("buyer")){ %>
+				              <li class="nav-item hotel_bedding">
+				                <a class="nav-link" href="/bids/getBids">My Bids</a>
+				              </li>
+				              <%} if(user.getRole().equals("seller")){%>
+				              <li class="nav-item">
+				                <a class="nav-link" href="/auctions/getAuctions" tabindex="-1" aria-disabled="true">My Auctions</a>
+				              </li>
+				            <%} %>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="/auction/logout" tabindex="-1" aria-disabled="true">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
 
                 <div class="icons">
-                    <ul class="navbar-nav p-0 ms-auto">
-                        <li class="nav-item">
-                            <a href="login.html" class="text-black text-uppercase">
-                                sign in/Register
-                            </a>
-                        </li>
-                    </ul>
-                </div>        
+		            <ul class="navbar-nav p-0 ms-auto">
+		              <li class="nav-item">
+		                <a href="/user/viewProfile" class="text-black text-uppercase">
+		                  Welcome <%=user.getFname()%> <%=user.getLname()%>
+		                </a>
+		              </li>
+		            </ul>
+		          </div>      
 
             </div>
         </nav>
@@ -130,20 +162,20 @@
 </header>
 <!-- header end -->
 
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="col-sm-8 col-md-6 col-lg-4 p-6 mx-auto text-center bg-white position-relative mt-5">
     <ul class="nav nav-pills mb-3 mx-auto" id="pills-tab" role="tablist">
-        <li class="nav-item" role="presentation">
+        <!-- <li class="nav-item" role="presentation">
             <button class="nav-link active" id="pills-login-tab" data-bs-toggle="pill" data-bs-target="#pills-login"
             type="button" role="tab" aria-controls="pills-login" aria-selected="true">Feedback for Admin</button>
-        </li>
+        </li> -->
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="pills-signup-tab" data-bs-toggle="pill" data-bs-target="#pills-signup"
+            <button class="nav-link active" id="pills-signup-tab" data-bs-toggle="pill" data-bs-target="#pills-signup"
             type="button" role="tab" aria-controls="pills-signup" aria-selected="false">Feedback for Product</button>
         </li>
     </ul>
     <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab">
+       <!--  <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab">
             <div class="site-section mt-3">
                 <div class="container">
                     <div class="row">
@@ -191,71 +223,62 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="tab-pane fade" id="pills-signup" role="tabpanel" aria-labelledby="pills-signup-tab">
+        </div> -->
+        <div class="tab-pane fade show active" id="pills-signup" role="tabpanel" aria-labelledby="pills-signup-tab">
             <div class="site-section mt-3">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 mx-auto text-center bg-white position-relative  my-4">
+                            
+                            <form:form method="post" action="/feedback/sendFeedback" modelAttribute="feedback">
                             <div class="row" style="margin-bottom: 15px;">
                                 <div class="col-md-6 form-group">
-                                    <input type="text" id="fname" class="form-control form-control" placeholder="First Name">
+                                    <input type="text" disabled="disabled" id="fname" class="form-control form-control" value="<%=user.getFname()%>">
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="text" id="lname" class="form-control form-control"  placeholder="Last Name">
+                                    <input type="text" disabled="disabled" id="lname" class="form-control form-control"  value="<%=user.getLname()%>">
                                 </div>
                             </div>
                             <div class="row" style="margin-bottom: 15px;">
                                 <div class="col-md-6 form-group">
-                                    <input type="text" id="eaddress" class="form-control form-control"  placeholder="Email">
+                                    <input type="text" disabled="disabled" id="eaddress" class="form-control form-control"  value="<%=user.getEmail()%>">
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="text" id="tel" class="form-control form-control"  placeholder="Phone">
-                                </div>
-                            </div>
-                            <div class="row" style="margin-bottom: 15px;">
-                                <div class="col-md-12 form-group">
-                                    <input type="text" id="title" class="form-control form-control" placeholder="Product Name">
+                                    <input type="text" disabled="disabled" id="tel" class="form-control form-control"  value="<%=user.getPhoneNumber()%>">
                                 </div>
                             </div>
                             <div class="row" style="margin-bottom: 15px;">
                                 <div class="col-md-12 form-group">
-                                    <select id="category" class="form-control">
-                                        <option value="none" selected disabled hidden>Select a Category</option>
-                                        <option id="sports">Sports</option>
-                                        <option id="decor">Decor</option>
-                                        <option id="electronics">Electronics</option>
-                                        <option id="clothing">Clothing</option>
-                                        <option id="stationary">Stationary</option>
+                                    <select id="selectedProduct" name = "selectedProduct" class="form-control">
+                                        <option value="none" selected disabled hidden>Select a Product</option>
+                                        <c:forEach items="${productList }" var="productItem">
+                                        <option id="${productItem.productId}" value="${productItem.productId}">${productItem.productName }</option>
+                                        </c:forEach>
                                     </select>
                                 </div>
                             </div>
-                            <div class="row" style="margin-top: 15px;">
-                                <div class="col-md-12 form-group">
-                                    <select id="subcategory" class="form-control">
-                                        <option value="none" selected disabled hidden>Select a Sub-Category</option>
-                                        <option id="sportswear">Sports Wear</option>
-                                        <option id="furniture">Furniture</option>
-                                        <option id="phones">Phones</option>
-                                        <option id="lamps">Lamps</option>
-                                        <option id="shirts">Shirts</option>
-                                    </select>
-                                </div>
-                            </div>
+                            
+                            <div class="bid-wrap">
+	                            <div class="row" style="margin-bottom: 15px;">
+		                            <div class="col-md-12 form-group">
+			                           <form:input id="userBid" class="form-control form-control" name="userBid" type="number" placeholder="Rating" max="10" min="1" path="rating"/>
+			                        </div>
+		                        </div>
+                        	</div>
+                        	
+                            
                             <div class="row"  style="margin-top: 15px;">
                                 <div class="col-md-12 form-group" > 
-                                    <textarea name="" id="message" cols="30" rows="10" class="form-control" placeholder="Message"></textarea>
+                                    <form:textarea name="" id="message" cols="30" rows="10" class="form-control" placeholder="Comments" path="comments"></form:textarea>
                                 </div>
                             </div>
-                            <div class="row"  style="margin-top: 15px;">
-                                <div class="col-md-4" style="padding-top: 5px;"><label for="file">Image</label></div>
-                                <div class="col-md-8 form-group"><input type="file" id="file" class="form-control form-control"></div>
-                            </div>  
+                             
                             <div class="row"  style="margin-top: 15px;">
                                 <div class="col-12"  style="text-align: center;">
-                                    <input type="submit" value="Send Message" class="btn btn-primary px-5"> 
+                                    <button type="submit" value="Send Message" class="btn btn-primary px-5">Send Feedback</button>
                                 </div>
                             </div>
+                        </form:form>
                         </div>
                         
                         <div class="mx-auto text-center bg-white position-relative my-3">
@@ -286,8 +309,8 @@
 </div>
 </div> 
 <!-- footer end -->
-<script src="js/index.js"></script>
-<script src="js/header.js"></script>
+<script src="<%=request.getContextPath() %>/js/index.js"></script>
+<script src="<%=request.getContextPath() %>/js/header.js"></script>
 </body>
 
 </html>

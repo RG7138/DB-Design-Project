@@ -1,5 +1,7 @@
 package com.auction.OnlineAuction.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -11,6 +13,9 @@ import java.util.List;
 
 @Repository
 public interface BidRepository extends JpaRepository<Bid, Integer>{
+	
+	@Query("Select b from Bid b where b.buyer.buyerId = :buyerId")
+	public List<Bid> getBidByBuyerId(@Param("buyerId") int buyerId);
 
 	//all bids for a product
 	@Query("from Bid b where b.product= :product_id")

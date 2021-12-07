@@ -16,7 +16,8 @@
     margin-bottom: 78px;
 }
 .product-img{
-    height:458px;
+    height:420px;
+    width: 315px;
 }
 .product-img{
     object-fit: cover;

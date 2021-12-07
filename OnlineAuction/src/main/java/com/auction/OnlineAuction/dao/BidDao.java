@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.auction.OnlineAuction.model.Bid;
-import com.auction.OnlineAuction.model.User;
 import com.auction.OnlineAuction.repository.BidRepository;
 
 @Service
@@ -19,24 +18,11 @@ public class BidDao {
 		return bidRepository.findAll();
 	}
 	
-	public List<Bid> allProductidBids(Integer product_id) {
-		List<Bid> bid = bidRepository.bidsAccordingtoProductid(product_id);
-		return bid;
+	public List<Bid> getBidDetailsByBuyerId(int buyerId) {
+		return bidRepository.getBidByBuyerId(buyerId);
 	}
 	
-	public Integer maxBidforaProduct(Integer product_id) {
-		Integer maxbid = bidRepository.maxBidforproduct(product_id);
-		return maxbid;
-	}
-	
-	public List<Bid> getAllBidsforaBuyer(Integer buyer_id){
-		List<Bid> bid= bidRepository.bidsOfABuyer(buyer_id);
-		return bid;
-	}
-	
-	public Bid newBid(Bid bid) {
+	public Bid saveBid(Bid bid) {
 		return bidRepository.save(bid);
 	}
-	
-	
 }

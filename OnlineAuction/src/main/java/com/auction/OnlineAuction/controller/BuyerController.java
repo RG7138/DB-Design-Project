@@ -13,6 +13,7 @@ import com.auction.OnlineAuction.dao.BuyerDao;
 import com.auction.OnlineAuction.dao.UserDao;
 import com.auction.OnlineAuction.model.Buyer;
 import com.auction.OnlineAuction.model.User;
+import com.auction.OnlineAuction.repository.BuyerRepository;
 
 @RestController
 @RequestMapping("/buyer")
@@ -59,6 +60,17 @@ public class BuyerController {
 	public ModelAndView buy() {
 		
 		return new ModelAndView("buy");
+		
+	}
+	
+	@PostMapping(value = "/updateProfile")
+	public ModelAndView updateBuyer(@ModelAttribute("data") Buyer buyer) {
+		
+		System.out.println(buyer.getShippingAddress());
+		int updatedRows = buyerDao.updateBuyer(buyer);
+		userDao.updateUser(buyer.getUser());
+		System.out.println("The number of rows updated  ---------------- "+updatedRows);
+		return new ModelAndView("profile", "data",buyer);
 		
 	}
 }

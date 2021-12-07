@@ -88,40 +88,40 @@ $(document).ready(function() {
     </header>
     <!-- main header end -->
 	<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-    <h2 style="font-family: 'lato'; text-align: center; padding-top: 10px;">Users</h2>
+    <h2 style="font-family: 'lato'; text-align: center; padding-top: 10px;">Products</h2>
 	<div class="ml-4 mt-4 mr-4">
 	<table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>Role</th>
-                <th>Action</th>
+                <th>Product Name</th>
+                <th>Sub-Category Name</th>
+                <th>Category Name</th>
+                <th>Product Info</th>
+                <th>Initial Bid Price</th>
+                <th>Max Bid Price</th>
             </tr>
         </thead>
         <tbody>
-        <c:forEach items="${users }" var="user">
+        <c:forEach items="${products}" var="product">
             <tr>
-                <td>${user.fname }</td>
-                <td>${user.lname }</td>
-                <td>${user.email }</td>
-                <td>${user.phoneNumber }</td>
-                <td>${user.role }</td>
-                <td><a href="/admin/delete/${user.userId }" style="color: red">Deacticate</a></td>
+                <td>${product.productName }</td>
+                <td>${product.subCategory.subCategoryName }</td>
+                <td>${product.subCategory.category.categoryName}</td>
+                <td>${product.productInfo }</td>
+                <td>${product.initialBidPrice}</td>
+                <td>${product.maxBidPrice }</td>
             </tr>
             </c:forEach>
             
             </tbody>
         <tfoot>
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>Role</th>
-                <th>Action</th>
+               <th>Product Name</th>
+                <th>Sub-Category Name</th>
+                <th>Category Name</th>
+                <th>Product Info</th>
+                <th>Initial Bid Price</th>
+                <th>Max Bid Price</th>
             </tr>
         </tfoot>
     </table>

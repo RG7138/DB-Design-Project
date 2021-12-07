@@ -53,24 +53,46 @@
             </a>
           </div>
           <div class="navigation collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 p-0 text-uppercase">
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/user/home">home</a>
-              </li>
-              <li class="nav-item hotel_bedding">
-                <a class="nav-link" href="/buyer/buy">buy</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/seller/sell" tabindex="-1" aria-disabled="true">sell</a>
-              </li>
-              <li class="nav-item position-relative services">
-                <a class="nav-link" href="services.html" tabindex="-1" aria-disabled="true">services</a>
-              </li>
-              <li class="nav-item ">
-                <a class="nav-link" href="Feedback.html" tabindex="-1" aria-disabled="true">Feedback</a>
-              </li>
-            </ul>
-          </div>
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 p-0 text-uppercase">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="/user/home">home</a>
+                            </li>
+                            <%if(user.getRole().equals("buyer")){ %>
+				              <li class="nav-item hotel_bedding">
+				                <a class="nav-link" href="/buyer/buy">buy</a>
+				              </li>
+				              <%} if(user.getRole().equals("seller")){%>
+				              <li class="nav-item">
+				                <a class="nav-link" href="/seller/sell" tabindex="-1" aria-disabled="true">sell</a>
+				              </li>
+				            <%} %>
+                            <li class="nav-item position-relative services">
+                                <a class="nav-link" href="/auction/service" tabindex="-1" aria-disabled="true">services</a>
+
+                            </li>
+                            <%if(user.getRole().equals("buyer")){ %>
+				              <li class="nav-item ">
+                                <a class="nav-link" href="/auction/feedback" tabindex="-1" aria-disabled="true">feedback</a>
+                            </li>
+				              <%} if(user.getRole().equals("seller")){%>
+				              <li class="nav-item ">
+                                <a class="nav-link" href="/feedback/sellerFeedbacks" tabindex="-1" aria-disabled="true">feedback</a>
+                            </li>
+				            <%} %>
+                            <%if(user.getRole().equals("buyer")){ %>
+				              <li class="nav-item hotel_bedding">
+				                <a class="nav-link" href="/bids/getBids">My Bids</a>
+				              </li>
+				              <%} if(user.getRole().equals("seller")){%>
+				              <li class="nav-item">
+				                <a class="nav-link" href="/auctions/getAuctions" tabindex="-1" aria-disabled="true">My Auctions</a>
+				              </li>
+				            <%} %>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="/auction/logout" tabindex="-1" aria-disabled="true">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
 
           <div class="icons">
             <ul class="navbar-nav p-0 ms-auto">
@@ -111,6 +133,7 @@
             </a>
           </div>
         </li>
+        <%if(user.getRole().equals("buyer")){ %>
         <li>
           <div class="px-2 py-1 ">
             <a href="" class="text-uppercase text-decoration-none text-black">
@@ -118,6 +141,7 @@
             </a>
           </div>
         </li>
+        <%} if(user.getRole().equals("seller")){%>
         <li>
           <div class="px-2  py-4">
             <a href="" class="text-uppercase text-decoration-none text-black ">
@@ -125,6 +149,7 @@
             </a>
           </div>
         </li>
+        <%} %>
         <li>
           <div class="accordion accordion-flush" id="mobile_navigation">
             <div class="accordion-item">
@@ -190,7 +215,7 @@
               best place to buy, sell and save
             </h5>
             <div class="bottom-banner-btn-wrap mt-5">
-              <a href="buy.html" class="btn btn-primary">let’s get started</a>
+              <a href="/buyer/buy" class="btn btn-primary">Get started</a>
             </div>
           </div>
         </div>
@@ -203,7 +228,7 @@
       <div class="container">
         <div class="heading text-center">
           <h4 class=" fst-italic fw-semi-bold h4-secondary text-capitalize">auctions</h4>
-          <h2 class=" fw-bold text-capitalize">items in auction</h2>
+          <h2 class=" fw-bold text-capitalize">Recommended items in auction</h2>
         </div>
         <div class="product-main">
           <div class="product-links">
@@ -234,94 +259,20 @@
     }
   }'>
   <div class="swiper-wrapper">
+  <c:forEach items="${productList }" var="product">
     <div class=" swiper-slide position-relative">
       <div class="product-img">
-        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p1.jpg" alt="img not found " class="w-100" ></a>
+        <a href="/product/productDetails?productId=${product.productId}"><img src="<%=request.getContextPath() %>/images/product/${product.productName}.jpg" alt="img not found " class="w-100" ></a>
       </div>
       <div class="product-detail mt-3">
-        <a href="product1.html" class=" fw-bold text-decoration-none text-capitalize text-dark-coffee"><h5>black shoes</h5></a>
-        <h6 class=" fs-13 fw-normal text-uppercase">shoes</h6>
+        <a href="/product/productDetails?productId=${product.productId}" class=" fw-bold text-decoration-none text-capitalize text-dark-coffee"><h5><c:out value="${product.productName}"></c:out></h5></a>
+        <h6 class=" fs-13 fw-normal text-uppercase"><c:out value="${product.subCategory.subCategoryName}"></c:out></h6>
       </div>
-      <a href="product1.html" class="btn btn-primary-outline">submit a bid</a>
-      <span class="badge  bg-cream-blue text-regal-blue position-absolute">74$</span>
+      <a href="/product/productDetails?productId=${product.productId}" class="btn btn-primary-outline">Submit a bid</a>
+      <span class="badge  bg-cream-blue text-regal-blue position-absolute"><c:out value="${product.maxBidPrice}$"></c:out></span>
     </div>
-    <div class=" swiper-slide position-relative">
-      <div class="product-img">
-        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p2.jpg" alt="img not found " class="w-100" ></a>
-      </div>
-      <div class="product-detail mt-3">
-        <a href="product1.html" class=" fw-bold text-decoration-none text-capitalize text-dark-coffee"><h5>women hangbag</h5></a>
-        <h6 class=" fs-13 fw-normal text-uppercase">handbags</h6>
-      </div>
-      <a href="product1.html" class="btn btn-primary-outline">submit a bid</a>
-      <span class="badge  bg-cream-blue text-regal-blue position-absolute">95$</span>
-    </div>
-    <div class=" swiper-slide position-relative">
-      <div class="product-img">
-        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p3.jpg" alt="img not found " class="w-100" ></a>
-      </div>
-      <div class="product-detail mt-3">
-        <a href="product1.html" class=" fw-bold text-decoration-none text-capitalize text-dark-coffee"><h5>men jacket</h5></a>
-        <h6 class=" fs-13 fw-normal text-uppercase">jackets</h6>
-      </div>
-      <a href="product1.html" class="btn btn-primary-outline">submit a bid</a>
-      <span class="badge  bg-cream-blue text-regal-blue position-absolute">78$</span>
-    </div>
-    <div class=" swiper-slide position-relative">
-      <div class="product-img">
-        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p4.jpg" alt="img not found " class="w-100" ></a>
-      </div>
-      <div class="product-detail mt-3">
-        <a href="product1.html" class=" fw-bold text-decoration-none text-capitalize text-dark-coffee"><h5>men sunglasses</h5></a>
-        <h6 class=" fs-13 fw-normal text-uppercase">sunglasses</h6>
-      </div>
-      <a href="product1.html" class="btn btn-primary-outline">submit a bid</a>
-      <span class="badge  bg-cream-blue text-regal-blue position-absolute">88$</span>
-    </div>
-    <div class=" swiper-slide position-relative">
-      <div class="product-img">
-        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p5.jpg" alt="img not found " class="w-100" ></a>
-      </div>
-      <div class="product-detail mt-3">
-        <a href="product1.html" class=" fw-bold text-decoration-none text-capitalize text-dark-coffee"><h5>ear phones</h5></a>
-        <h6 class=" fs-13 fw-normal text-uppercase">gadgets</h6>
-      </div>
-      <a href="product1.html" class="btn btn-primary-outline">submit a bid</a>
-      <span class="badge  bg-cream-blue text-regal-blue position-absolute">45$</span>
-    </div>
-    <div class=" swiper-slide position-relative">
-      <div class="product-img">
-        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p6.jpg" alt="img not found " class="w-100" ></a>
-      </div>
-      <div class="product-detail mt-3">
-        <a href="product1.html" class=" fw-bold text-decoration-none text-capitalize text-dark-coffee"><h5>cellieng lamp</h5></a>
-        <h6 class=" fs-13 fw-normal text-uppercase">home decore</h6>
-      </div>
-      <a href="product1.html" class="btn btn-primary-outline">submit a bid</a>
-      <span class="badge  bg-cream-blue text-regal-blue position-absolute">25$</span>
-    </div>
-    <div class=" swiper-slide position-relative">
-      <div class="product-img">
-        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p7.jpg" alt="img not found " class="w-100" ></a>
-      </div>
-      <div class="product-detail mt-3">
-        <a href="product1.html" class=" fw-bold text-decoration-none text-capitalize text-dark-coffee"><h5>zaveri pearls</h5></a>
-        <h6 class=" fs-13 fw-normal text-uppercase">jewellery</h6>
-      </div>
-      <a href="product1.html" class="btn btn-primary-outline">submit a bid</a>
-      <span class="badge  bg-cream-blue text-regal-blue position-absolute">50$</span>
-    </div>
-    <div class=" swiper-slide position-relative">
-      <div class="product-img">
-        <a href="product1.html"><img src="<%=request.getContextPath() %>/images/p8.jpg" alt="img not found " class="w-100" ></a>
-      </div>
-      <div class="product-detail mt-3">
-        <a href="product1.html" class=" fw-bold text-decoration-none text-capitalize text-dark-coffee"><h5>samsung smart watch</h5></a>
-        <h6 class=" fs-13 fw-normal text-uppercase">smart watches</h6>
-      </div>
-      <a href="product1.html" class="btn btn-primary-outline">submit a bid</a>
-      <span class="badge  bg-cream-blue text-regal-blue position-absolute">50$</span>
-    </div>
+    </c:forEach>
+    
   </div>
 </div>
 <div class="swiper-button-next icon-right-arrow fs-20 fw-bold"></div>

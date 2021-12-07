@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -98,6 +99,15 @@ public class AdminController {
 		
 		session.invalidate();
 		return new ModelAndView("adminLogin","admin", new Admin());
+		
+	}
+	
+	@GetMapping(value = "/delete/{userId}")
+	public ModelAndView deleteUser(@PathVariable("userId") int userId ,HttpSession session) {
+		
+		userDao.deactivateUser(userId);
+		List<User> users = userDao.getUserDetails();
+		return new ModelAndView("dashboard","users",users);
 		
 	}
 }

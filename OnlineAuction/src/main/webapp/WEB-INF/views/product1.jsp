@@ -209,13 +209,13 @@
                     <div class="product-right-wrap col-12 col-lg-6 col-xl-5 mt-5 mt-md-5 mt-xl-0 pt-5">
                         <h4 class="h4-secondary text-dark-coffee"><c:out value="${product.productName }"></c:out></h4>
                         <div class="product-price-wrap d-flex justify-content-between">
-                            <h5 class="fs-22 text-dark-coffee"><c:out value="${product.initialBidPrice}"></c:out></h5>
+                            <h5 class="fs-22 text-dark-coffee"><c:out value="${product.initialBidPrice}$"></c:out></h5>
                         </div>
                             
                             <div class="row pt-4">
                             <div class="col-md-4"><label for="startdate">Max Bid Price</label></div>
                             <div class="col-md-8 form-group">
-                                <label for="startdate"><c:out value="${product.maxBidPrice}"></c:out></label>
+                                <label for="startdate"><c:out value="${product.maxBidPrice}$"></c:out></label>
                             </div>
                         </div>
                         	
@@ -229,7 +229,7 @@
                         <div class="bid-wrap">
                             <div class="row pt-4">
 	                            <div class="col-md-4"><label for="bids">Your Bid</label></div>
-	                            <div class="col-md-8 form-group"><input id="userBid" name="userBid" type="number" placeholder="${product.maxBidPrice}" min="${product.maxBidPrice}"></div>
+	                            <div class="col-md-8 form-group"><input id="userBid" name="userBid" type="number" placeholder="${product.maxBidPrice}" min="${product.maxBidPrice}" step="100"></div>
 	                        </div>
                         </div>
                         <input type="hidden" id="productId" name="productId" value="${product.productId}">

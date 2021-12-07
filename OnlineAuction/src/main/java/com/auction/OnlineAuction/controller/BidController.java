@@ -72,6 +72,7 @@ public class BidController {
 		if(addedBid!=null) {
 			Product product = productDao.getProductByProductId(productId);
 			product.setMaxBidPrice(addedBid.getBidPrice());
+			productDao.updateProduct(product);
 		}
 		List<Bid> bids = bidDao.getBidDetailsByBuyerId(buyer.getBuyerId());
 		return new ModelAndView("myBids","bids",bids);

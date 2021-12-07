@@ -1,5 +1,7 @@
 package com.auction.OnlineAuction.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -11,7 +13,10 @@ import com.auction.OnlineAuction.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>{
 
-	@Query("Select u from User u where u.email= :email and u.password = :password")
+	@Query("Select u from User u where u.status=1")
+	public List<User> findAllByStatus();
+	
+	@Query("Select u from User u where u.email= :email and u.password = :password and u.status=1")
 	public User getUserByEmailAndPassword(@Param("email") String email, @Param("password") String password);
 	
 	@Modifying
